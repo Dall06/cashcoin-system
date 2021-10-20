@@ -1,0 +1,4 @@
+/log/access.log
+/log/error.log
+.env
+db.sql
