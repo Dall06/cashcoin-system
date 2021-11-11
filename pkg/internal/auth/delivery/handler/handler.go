@@ -34,14 +34,22 @@ func NewAuthHandler(ai *usecase.AuthInteractor) *AuthHandler {
 	}
 }
 
-func (ah *AuthHandler) GETAuth(w http.ResponseWriter, r *http.Request) {
-	a, err := ah.authHelper.ValidateGETAAuthRequest(r)
+func (ah *AuthHandler) Authenticate(w http.ResponseWriter, r *http.Request) {
+	a, err := ah.authHelper.ValidateAuthRequest(r)
 	if err != nil {
 		ah.responseHandler.RespondWithBadRequest(err, w)
 		ah.loggerHandler.LogError("%s", err)
 		return
 	}
-	res, err := ah.AuthInteractor.Authenticate(a)
+
+	ra, err := ah.AuthInteractor.Authenticate(a)
+	if err != nil {
+		ah.responseHandler.RespondWithInternalServerError(err, w)
+		ah.loggerHandler.LogError("%s", err)
+		return
+	}
+
+	res, err := ah.authHelper.ValidateAuthResponse(ra)
 	if err != nil {
 		ah.responseHandler.RespondWithInternalServerError(err, w)
 		ah.loggerHandler.LogError("%s", err)

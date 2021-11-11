@@ -19,8 +19,8 @@ func NewAuthHelper() *AuthHelper {
 	}
 }
 
-func (ah *AuthHelper) ValidateGETAAuthRequest(r *http.Request) (*auth.Account, error) {
-	var get GETAAuth
+func (ah *AuthHelper) ValidateAuthRequest(r *http.Request) (*auth.Account, error) {
+	var get Request
 	var a auth.Account
 
 	err := json.NewDecoder(r.Body).Decode(&get)
@@ -42,4 +42,31 @@ func (ah *AuthHelper) ValidateGETAAuthRequest(r *http.Request) (*auth.Account, e
 	}
 
 	return &a, nil
+}
+
+func (ah *AuthHelper) ValidateAuthResponse(a *auth.Account) (*Account, error) {
+	res := &Account{
+		UUID:    a.UUID,
+		Email:   a.Email,
+		Phone:   a.Phone,
+		Balance: a.Balance,
+		Status:  a.Status,
+		Clabe:   a.Clabe,
+		Address:  address {
+			City:    a.Address.City,
+			State:   a.Address.State,
+			Country: a.Address.Country,
+		},
+		Client: client {
+			Name:     a.Client.Name,
+			LastName: a.Client.LastName,
+		},
+	}
+
+	err := ah.Validator.Struct(res)
+	if err != nil {
+		return nil, err
+	}
+
+	return res, err
 }

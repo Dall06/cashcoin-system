@@ -1,14 +1,14 @@
 package delivery
 
-type POSTNewAccount struct {
+type ReqCreate struct {
 	UUID		string `json:"AUUID"`
 	CUUID		string `json:"CUUID"`
 	ADDUUID		string `json:"ADDUUID"`
 	Email         string `json:"email" validate:"required,email"`
 	Phone         string `json:"phone"`
 	Password      string `json:"password" validate:"required"`
-	City          string `json:"city" validate:"required"`
 	Clabe          string `json:"clabe"`
+	City          string `json:"city" validate:"required"`
 	State         string `json:"state" validate:"required"`
 	Street        string `json:"street" validate:"required"`
 	BuldingNumber int    `json:"bnum" validate:"required"`
@@ -19,13 +19,13 @@ type POSTNewAccount struct {
 	Occupation    string `json:"occupation" validate:"required"`
 }
 
-type PUTStatus struct {
+type ReqStatus struct {
 	Email  string `json:"email" validate:"email"`
 	Phone  string `json:"phone"`
 	Status string `json:"status" validate:"required"`
 }
 
-type PUTAccount struct {
+type ReqAccount struct {
 	Email    string `json:"email" validate:"email"`
 	Phone    string `json:"phone"`
 	NewEmail string `json:"newEmail"`
@@ -33,14 +33,14 @@ type PUTAccount struct {
 	Password string `json:"password" validate:"required"`
 }
 
-type PUTPassword struct {
+type ReqPassword struct {
 	Email       string `json:"email" validate:"email"`
 	Phone       string `json:"phone"`
 	Password    string `json:"password" validate:"required"`
 	NewPassword string `json:"newPassword" validate:"required"`
 }
 
-type PUTAddress struct {
+type ReqAddress struct {
 	Email         string `json:"email" validate:"email"`
 	Phone         string `json:"phone"`
 	City          string `json:"city" validate:"required"`
@@ -51,7 +51,7 @@ type PUTAddress struct {
 	PostalCode    string `json:"pc" validate:"required"`
 }
 
-type PUTClient struct {
+type ReqPersonal struct {
 	Email      string `json:"email" validate:"required,email"`
 	Phone      string `json:"phone"`
 	Name       string `json:"name" validate:"required"`
@@ -59,7 +59,9 @@ type PUTClient struct {
 	Occupation string `json:"occupation" validate:"required"`
 }
 
-type GETAccount struct {
+type ReqIndex struct {
 	Email string `json:"email" validate:"email"`
 	Phone string `json:"phone"`
 }
+
+

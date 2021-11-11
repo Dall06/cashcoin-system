@@ -9,18 +9,18 @@ import (
 	"gopkg.in/go-playground/validator.v9"
 )
 
-type HandlerHelper struct {
+type AccountHelper struct {
 	Validator *validator.Validate
 }
 
-func NewHandlerHelper() *HandlerHelper {
-	return &HandlerHelper{
+func NewHandlerHelper() *AccountHelper {
+	return &AccountHelper{
 		Validator: validator.New(),
 	}
 }
 
-func (hh *HandlerHelper) ValidatePOSTNewAccountRequest(r *http.Request) (*account.Account, error) {
-	var post POSTNewAccount
+func (ah *AccountHelper) ValidatePOSTNewAccountRequest(r *http.Request) (*account.Account, error) {
+	var post ReqCreate
 	var a account.Account
 
 	err := json.NewDecoder(r.Body).Decode(&post)
@@ -28,7 +28,7 @@ func (hh *HandlerHelper) ValidatePOSTNewAccountRequest(r *http.Request) (*accoun
 		return &a, err
 	}
 
-	err = hh.Validator.Struct(post)
+	err = ah.Validator.Struct(post)
 	if err != nil {
 		return &a, err
 	}
@@ -38,29 +38,29 @@ func (hh *HandlerHelper) ValidatePOSTNewAccountRequest(r *http.Request) (*accoun
 		Email:    post.Email,
 		Phone:    post.Phone,
 		Password: post.Password,
-		Clabe: utils.GenerateClabe(post.Clabe),
+		Clabe:    utils.GenerateClabe(post.Clabe),
 		Client: account.Client{
-			UUID:     utils.CheckAndReturn(post.CUUID),
-			Name:     post.Name,
-			LastName: post.LastName,
+			UUID:       utils.CheckAndReturn(post.CUUID),
+			Name:       post.Name,
+			LastName:   post.LastName,
 			Occupation: post.Occupation,
 		},
 		Address: account.Address{
-			UUID: utils.CheckAndReturn(post.ADDUUID),
-			City: post.City,
-			State: post.State,
-			Street: post.Street,
+			UUID:          utils.CheckAndReturn(post.ADDUUID),
+			City:          post.City,
+			State:         post.State,
+			Street:        post.Street,
 			BuldingNumber: post.BuldingNumber,
-			Country: post.Country,
-			PostalCode: post.PostalCode,
+			Country:       post.Country,
+			PostalCode:    post.PostalCode,
 		},
 	}
 
 	return &a, nil
 }
 
-func (hh *HandlerHelper) ValidatePUTStatusRequest(r *http.Request) (*account.Account, error) {
-	var put PUTStatus
+func (ah *AccountHelper) ValidatePUTStatusRequest(r *http.Request) (*account.Account, error) {
+	var put ReqStatus
 	var a account.Account
 
 	err := json.NewDecoder(r.Body).Decode(&put)
@@ -68,22 +68,22 @@ func (hh *HandlerHelper) ValidatePUTStatusRequest(r *http.Request) (*account.Acc
 		return &a, err
 	}
 
-	err = hh.Validator.Struct(&a)
+	err = ah.Validator.Struct(&a)
 	if err != nil {
 		return &a, err
 	}
 
 	a = account.Account{
-		Email: put.Email,
-		Phone: put.Phone,
+		Email:  put.Email,
+		Phone:  put.Phone,
 		Status: put.Status,
 	}
 
 	return &a, err
 }
 
-func (hh *HandlerHelper) ValidatePUTAccountRequest(r *http.Request) (*account.Account, string, string, error) {
-	var put PUTAccount
+func (ah *AccountHelper) ValidatePUTAccountRequest(r *http.Request) (*account.Account, string, string, error) {
+	var put ReqAccount
 	var a account.Account
 	var e string
 	var p string
@@ -93,7 +93,7 @@ func (hh *HandlerHelper) ValidatePUTAccountRequest(r *http.Request) (*account.Ac
 		return &a, e, p, err
 	}
 
-	err = hh.Validator.Struct(&put)
+	err = ah.Validator.Struct(&put)
 	if err != nil {
 		return &a, e, p, err
 	}
@@ -109,8 +109,8 @@ func (hh *HandlerHelper) ValidatePUTAccountRequest(r *http.Request) (*account.Ac
 	return &a, e, p, err
 }
 
-func (hh *HandlerHelper) ValidatePUTPasswordRequest(r *http.Request) (*account.Account, string, error) {
-	var put PUTPassword
+func (ah *AccountHelper) ValidatePUTPasswordRequest(r *http.Request) (*account.Account, string, error) {
+	var put ReqPassword
 	var a account.Account
 	var p string
 
@@ -119,7 +119,7 @@ func (hh *HandlerHelper) ValidatePUTPasswordRequest(r *http.Request) (*account.A
 		return &a, p, err
 	}
 
-	err = hh.Validator.Struct(&put)
+	err = ah.Validator.Struct(&put)
 	if err != nil {
 		return &a, p, err
 	}
@@ -134,8 +134,8 @@ func (hh *HandlerHelper) ValidatePUTPasswordRequest(r *http.Request) (*account.A
 	return &a, p, err
 }
 
-func (hh *HandlerHelper) ValidatePUTAddressRequest(r *http.Request) (*account.Account, error) {
-	var put PUTAddress
+func (ah *AccountHelper) ValidatePUTAddressRequest(r *http.Request) (*account.Account, error) {
+	var put ReqAddress
 	var a account.Account
 
 	err := json.NewDecoder(r.Body).Decode(&put)
@@ -143,29 +143,29 @@ func (hh *HandlerHelper) ValidatePUTAddressRequest(r *http.Request) (*account.Ac
 		return &a, err
 	}
 
-	err = hh.Validator.Struct(&put)
+	err = ah.Validator.Struct(&put)
 	if err != nil {
 		return &a, err
 	}
 
 	a = account.Account{
-		Email:    put.Email,
-		Phone:    put.Phone,
+		Email: put.Email,
+		Phone: put.Phone,
 		Address: account.Address{
-			City: put.City,
-			State: put.State,
-			Street: put.Street,
+			City:          put.City,
+			State:         put.State,
+			Street:        put.Street,
 			BuldingNumber: put.BuldingNumber,
-			Country: put.Country,
-			PostalCode: put.PostalCode,
+			Country:       put.Country,
+			PostalCode:    put.PostalCode,
 		},
 	}
 
 	return &a, err
 }
 
-func (hh *HandlerHelper) ValidatePUTClientRequest(r *http.Request) (*account.Account, error) {
-	var put PUTClient
+func (ah *AccountHelper) ValidatePUTClientRequest(r *http.Request) (*account.Account, error) {
+	var put ReqPersonal
 	var a account.Account
 
 	err := json.NewDecoder(r.Body).Decode(&put)
@@ -173,7 +173,7 @@ func (hh *HandlerHelper) ValidatePUTClientRequest(r *http.Request) (*account.Acc
 		return &a, err
 	}
 
-	err = hh.Validator.Struct(&put)
+	err = ah.Validator.Struct(&put)
 	if err != nil {
 		return &a, err
 	}
@@ -182,16 +182,16 @@ func (hh *HandlerHelper) ValidatePUTClientRequest(r *http.Request) (*account.Acc
 		Email: put.Email,
 		Phone: put.Phone,
 		Client: account.Client{
-			Name:     put.Name,
-			LastName: put.LastName,
+			Name:       put.Name,
+			LastName:   put.LastName,
 			Occupation: put.Occupation,
 		},
 	}
 	return &a, err
 }
 
-func (hh *HandlerHelper) ValidateGETAccountRequest(r *http.Request) (*account.Account, error) {
-	var get GETAccount
+func (ah *AccountHelper) ValidateGETAccountRequest(r *http.Request) (*account.Account, error) {
+	var get ReqIndex
 	var a account.Account
 
 	err := json.NewDecoder(r.Body).Decode(&get)
@@ -205,4 +205,31 @@ func (hh *HandlerHelper) ValidateGETAccountRequest(r *http.Request) (*account.Ac
 	}
 
 	return &a, nil
+}
+
+func (ah *AccountHelper) ValidateSelectResponse(a *account.Account) (*Account, error) {
+	res := &Account{
+		UUID:    a.UUID,
+		Email:   a.Email,
+		Phone:   a.Phone,
+		Balance: a.Balance,
+		Status:  a.Status,
+		Clabe:   a.Clabe,
+		Address: address {
+			City:    a.Address.City,
+			State:   a.Address.State,
+			Country: a.Address.Country,
+		},
+		Client: client {
+			Name:     a.Client.Name,
+			LastName: a.Client.LastName,
+		},
+	}
+
+	err := ah.Validator.Struct(res)
+	if err != nil {
+		return nil, err
+	}
+
+	return res, err
 }

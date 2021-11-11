@@ -19,7 +19,7 @@ import (
 )
 
 func TestGETAccount(t *testing.T) {
-	var get = delivery.GETAccount{
+	var get = delivery.ReqIndex{
 		Email: "test@email.com",
 		Phone: "47712345678",
 	}
@@ -48,7 +48,7 @@ func TestGETAccount(t *testing.T) {
 	ah := handler.NewAccountHandler(ai)
 	// We create a ResponseRecorder (which satisfies http.ResponseWriter) to record the response.
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(ah.GETAccount)
+	handler := http.HandlerFunc(ah.Index)
 
 	// Our handlers satisfy http.Handler, so we can call their ServeHTTP method
 	// directly and pass in our Request and ResponseRecorder.
@@ -65,7 +65,7 @@ func TestGETAccount(t *testing.T) {
 }
 
 func TestPOSTAccount(t *testing.T) {
-	var toSave = delivery.POSTNewAccount{
+	var toSave = delivery.ReqCreate{
 		UUID:          "5f2b9fb0-2720-4b13-b879-441db4577a06",
 		ADDUUID:       "44e07ff1-a9a0-4c20-a039-9858cfb06f9f",
 		CUUID:         "aa3a2202-b141-432a-8779-75da8cc146a7",
@@ -99,7 +99,7 @@ func TestPOSTAccount(t *testing.T) {
 	ah := handler.NewAccountHandler(ai)
 	// We create a ResponseRecorder (which satisfies http.ResponseWriter) to record the response.
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(ah.POSTNewAccount)
+	handler := http.HandlerFunc(ah.Create)
 
 	// Our handlers satisfy http.Handler, so we can call their ServeHTTP method
 	// directly and pass in our Request and ResponseRecorder.
@@ -116,7 +116,7 @@ func TestPOSTAccount(t *testing.T) {
 }
 
 func TestPUTAccount(t *testing.T) {
-	var put = delivery.PUTAccount{
+	var put = delivery.ReqAccount{
 		Email:    "test@email.com",
 		Phone:    "47712345678",
 		NewEmail: "test1@email.com",
@@ -153,7 +153,7 @@ func TestPUTAccount(t *testing.T) {
 
 	// We create a ResponseRecorder (which satisfies http.ResponseWriter) to record the response.
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(ah.PUTAccount)
+	handler := http.HandlerFunc(ah.ChangeAccount)
 
 	// Our handlers satisfy http.Handler, so we can call their ServeHTTP method
 	// directly and pass in our Request and ResponseRecorder.
@@ -170,7 +170,7 @@ func TestPUTAccount(t *testing.T) {
 }
 
 func TestPUTStatus(t *testing.T) {
-	var put = delivery.PUTStatus{
+	var put = delivery.ReqStatus{
 		Email:  "test@email.com",
 		Phone:  "47712345678",
 		Status: "ACTIVE",
@@ -205,7 +205,7 @@ func TestPUTStatus(t *testing.T) {
 
 	// We create a ResponseRecorder (which satisfies http.ResponseWriter) to record the response.
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(ah.PUTStatus)
+	handler := http.HandlerFunc(ah.ChangeStatus)
 
 	// Our handlers satisfy http.Handler, so we can call their ServeHTTP method
 	// directly and pass in our Request and ResponseRecorder.
@@ -222,7 +222,7 @@ func TestPUTStatus(t *testing.T) {
 }
 
 func TestChangePassword(t *testing.T) {
-	var put = delivery.PUTPassword{
+	var put = delivery.ReqPassword{
 		Email:       "test@email.com",
 		Phone:       "47712345678",
 		Password:    "Test1234",
@@ -258,7 +258,7 @@ func TestChangePassword(t *testing.T) {
 
 	// We create a ResponseRecorder (which satisfies http.ResponseWriter) to record the response.
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(ah.PUTPass)
+	handler := http.HandlerFunc(ah.ChangePassword)
 
 	// Our handlers satisfy http.Handler, so we can call their ServeHTTP method
 	// directly and pass in our Request and ResponseRecorder.
@@ -275,7 +275,7 @@ func TestChangePassword(t *testing.T) {
 }
 
 func TestPUTClient(t *testing.T) {
-	var put = delivery.PUTClient{
+	var put = delivery.ReqPersonal{
 		Email:      "test@email.com",
 		Phone:      "47712345678",
 		Name:       "Test",
@@ -312,7 +312,7 @@ func TestPUTClient(t *testing.T) {
 
 	// We create a ResponseRecorder (which satisfies http.ResponseWriter) to record the response.
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(ah.PUTClient)
+	handler := http.HandlerFunc(ah.ChangePersonal)
 
 	// Our handlers satisfy http.Handler, so we can call their ServeHTTP method
 	// directly and pass in our Request and ResponseRecorder.

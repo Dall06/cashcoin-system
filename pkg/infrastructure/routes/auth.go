@@ -32,7 +32,7 @@ func (aroutes *authRoutes) setAuthRoutes(ah *handler.AuthHandler) {
 	subRoute.HandleFunc("/welcome", func(rw http.ResponseWriter, r *http.Request) {
 		services.NewResponseHandler().RespondWithSuccess("welcome to auth routes", rw)
 	}).Methods(http.MethodGet)
-	subRoute.HandleFunc("/", ah.GETAuth).Methods(http.MethodGet)
+	subRoute.HandleFunc("/", ah.Authenticate).Methods(http.MethodGet)
 }
 
 func (aroutes *authRoutes) Set() {

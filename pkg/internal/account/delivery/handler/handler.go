@@ -17,17 +17,17 @@ const defaultExpirationCache time.Duration = 2
 const cleanupInterval time.Duration = 3
 
 type AccountHandler struct {
-	AccountInteractor *usecase.AccountInteractor
+	accountInteractor *usecase.AccountInteractor
 	responseHandler   *services.ResponseHandler
 	jwtHandler        *middleware.JWTHandler
 	loggerHandler     *services.LoggerHandler
-	helper            *delivery.HandlerHelper
+	helper            *delivery.AccountHelper
 	cache           *cache.Cache
 }
 
 func NewAccountHandler(ai *usecase.AccountInteractor) *AccountHandler {
 	return &AccountHandler{
-		AccountInteractor: ai,
+		accountInteractor: ai,
 		responseHandler:   services.NewResponseHandler(),
 		jwtHandler:        middleware.NewJWTHandler(),
 		loggerHandler:     services.NewLoggerHandler(),
@@ -36,7 +36,7 @@ func NewAccountHandler(ai *usecase.AccountInteractor) *AccountHandler {
 	}
 }
 
-func (ah *AccountHandler) POSTNewAccount(w http.ResponseWriter, r *http.Request) {
+func (ah *AccountHandler) Create(w http.ResponseWriter, r *http.Request) {
 	toSave, err := ah.helper.ValidatePOSTNewAccountRequest(r)
 	if err != nil {
 		ah.responseHandler.RespondWithBadRequest(err, w)
@@ -44,7 +44,7 @@ func (ah *AccountHandler) POSTNewAccount(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	res, err := ah.AccountInteractor.Save(toSave)
+	res, err := ah.accountInteractor.Save(toSave)
 	if err != nil {
 		ah.responseHandler.RespondWithInternalServerError(err, w)
 		ah.loggerHandler.LogError("%s", err)
@@ -55,7 +55,7 @@ func (ah *AccountHandler) POSTNewAccount(w http.ResponseWriter, r *http.Request)
 	ah.loggerHandler.LogAccess("%s %s %s\n", r.RemoteAddr, r.Method, r.URL)
 }
 
-func (ah *AccountHandler) PUTStatus(w http.ResponseWriter, r *http.Request) {
+func (ah *AccountHandler) ChangeStatus(w http.ResponseWriter, r *http.Request) {
 	v, err := ah.jwtHandler.ValidateAuthTokenCookie(r)
 	if err != nil {
 		ah.responseHandler.RespondWithInternalServerError(err, w)
@@ -75,7 +75,7 @@ func (ah *AccountHandler) PUTStatus(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response, err := ah.AccountInteractor.ChangeStatus(a)
+	response, err := ah.accountInteractor.ChangeStatus(a)
 	if err != nil {
 		ah.responseHandler.RespondWithInternalServerError(err, w)
 		ah.loggerHandler.LogError("%s", err)
@@ -86,7 +86,7 @@ func (ah *AccountHandler) PUTStatus(w http.ResponseWriter, r *http.Request) {
 	ah.responseHandler.RespondWithSuccess(response, w)
 }
 
-func (ah *AccountHandler) PUTAccount(w http.ResponseWriter, r *http.Request) {
+func (ah *AccountHandler) ChangeAccount(w http.ResponseWriter, r *http.Request) {
 	v, err := ah.jwtHandler.ValidateAuthTokenCookie(r)
 	if err != nil {
 		ah.responseHandler.RespondWithInternalServerError(err, w)
@@ -106,7 +106,7 @@ func (ah *AccountHandler) PUTAccount(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	res, err := ah.AccountInteractor.Change(a, ne, np)
+	res, err := ah.accountInteractor.Change(a, ne, np)
 	if err != nil {
 		ah.responseHandler.RespondWithInternalServerError(err, w)
 		ah.loggerHandler.LogError("%s", err)
@@ -117,7 +117,7 @@ func (ah *AccountHandler) PUTAccount(w http.ResponseWriter, r *http.Request) {
 	ah.responseHandler.RespondWithSuccess(res, w)
 }
 
-func (ah *AccountHandler) PUTAddress(w http.ResponseWriter, r *http.Request) {
+func (ah *AccountHandler) ChangeAddress(w http.ResponseWriter, r *http.Request) {
 	v, err := ah.jwtHandler.ValidateAuthTokenCookie(r)
 	if err != nil {
 		ah.responseHandler.RespondWithInternalServerError(err, w)
@@ -137,7 +137,7 @@ func (ah *AccountHandler) PUTAddress(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	res, err := ah.AccountInteractor.ChangeAddress(a)
+	res, err := ah.accountInteractor.ChangeAddress(a)
 	if err != nil {
 		ah.responseHandler.RespondWithInternalServerError(err, w)
 		ah.loggerHandler.LogError("%s", err)
@@ -148,7 +148,7 @@ func (ah *AccountHandler) PUTAddress(w http.ResponseWriter, r *http.Request) {
 	ah.responseHandler.RespondWithSuccess(res, w)
 }
 
-func (ah *AccountHandler) PUTPass(w http.ResponseWriter, r *http.Request) {
+func (ah *AccountHandler) ChangePassword(w http.ResponseWriter, r *http.Request) {
 	validated, err := ah.jwtHandler.ValidateAuthTokenCookie(r)
 	if err != nil {
 		ah.responseHandler.RespondWithInternalServerError(err, w)
@@ -168,7 +168,7 @@ func (ah *AccountHandler) PUTPass(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response, err := ah.AccountInteractor.ChangePassword(a, pass)
+	response, err := ah.accountInteractor.ChangePassword(a, pass)
 	if err != nil {
 		ah.responseHandler.RespondWithInternalServerError(err, w)
 		ah.loggerHandler.LogError("%s", err)
@@ -179,7 +179,7 @@ func (ah *AccountHandler) PUTPass(w http.ResponseWriter, r *http.Request) {
 	ah.responseHandler.RespondWithSuccess(response, w)
 }
 
-func (ah *AccountHandler) PUTClient(w http.ResponseWriter, r *http.Request) {
+func (ah *AccountHandler) ChangePersonal(w http.ResponseWriter, r *http.Request) {
 	v, err := ah.jwtHandler.ValidateAuthTokenCookie(r)
 	if err != nil {
 		ah.responseHandler.RespondWithInternalServerError(err, w)
@@ -199,7 +199,7 @@ func (ah *AccountHandler) PUTClient(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	res, err := ah.AccountInteractor.ChangeClient(a)
+	res, err := ah.accountInteractor.ChangeClient(a)
 	if err != nil {
 		ah.responseHandler.RespondWithInternalServerError(err, w)
 		ah.loggerHandler.LogError("%s", err)
@@ -210,7 +210,7 @@ func (ah *AccountHandler) PUTClient(w http.ResponseWriter, r *http.Request) {
 	ah.responseHandler.RespondWithSuccess(res, w)
 }
 
-func (ah *AccountHandler) GETAccount(w http.ResponseWriter, r *http.Request) {
+func (ah *AccountHandler) Index(w http.ResponseWriter, r *http.Request) {
 	v, err := ah.jwtHandler.ValidateAuthTokenCookie(r)
 	if err != nil {
 		ah.responseHandler.RespondWithInternalServerError(err, w)
@@ -238,7 +238,14 @@ func (ah *AccountHandler) GETAccount(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	res, err := ah.AccountInteractor.Index(rreq)
+	a, err := ah.accountInteractor.Index(rreq)
+	if err != nil {
+		ah.responseHandler.RespondWithInternalServerError(err, w)
+		ah.loggerHandler.LogError("%s", err)
+		return
+	}
+
+	res, err := ah.helper.ValidateSelectResponse(a)
 	if err != nil {
 		ah.responseHandler.RespondWithInternalServerError(err, w)
 		ah.loggerHandler.LogError("%s", err)

@@ -48,7 +48,7 @@ func TestGETtxns(t *testing.T) {
 	th := handler.NewTxnHandler(ti)
 	// We create a ResponseRecorder (which satisfies http.ResponseWriter) to record the response.
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(th.GETTxns)
+	handler := http.HandlerFunc(th.IndexTxns)
 
 	// Our handlers satisfy http.Handler, so we can call their ServeHTTP method
 	// directly and pass in our Request and ResponseRecorder.
@@ -106,7 +106,7 @@ func TestPOSTNewtxn(t *testing.T) {
 	th := handler.NewTxnHandler(ti)
 	// We create a ResponseRecorder (which satisfies http.ResponseWriter) to record the response.
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(th.POSTTxn)
+	handler := http.HandlerFunc(th.Make)
 
 	// Our handlers satisfy http.Handler, so we can call their ServeHTTP method
 	// directly and pass in our Request and ResponseRecorder.

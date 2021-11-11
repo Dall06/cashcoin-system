@@ -27,7 +27,7 @@ func NewTxnHandler(ti *usecase.TxnInteractor) *TxnHandler {
 	}
 }
 
-func (th *TxnHandler) POSTTxn(w http.ResponseWriter, r *http.Request) {
+func (th *TxnHandler) Make(w http.ResponseWriter, r *http.Request) {
 	v, err := th.JWTHandler.ValidateAuthTokenCookie(r)
 	if err != nil {
 		th.ResponseHandler.RespondWithInternalServerError(err, w)
@@ -54,7 +54,7 @@ func (th *TxnHandler) POSTTxn(w http.ResponseWriter, r *http.Request) {
 	th.ResponseHandler.RespondWithSuccess(res, w)
 }
 
-func (th *TxnHandler) GETTxns(w http.ResponseWriter, r *http.Request) {
+func (th *TxnHandler) IndexTxns(w http.ResponseWriter, r *http.Request) {
 	v, err := th.JWTHandler.ValidateAuthTokenCookie(r)
 	if err != nil {
 		th.ResponseHandler.RespondWithInternalServerError(err, w)

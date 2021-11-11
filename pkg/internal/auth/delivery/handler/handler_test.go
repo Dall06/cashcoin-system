@@ -18,7 +18,7 @@ import (
 )
 
 func TestGETAuth(t *testing.T) {
-	var get = delivery.GETAAuth{
+	var get = delivery.Request {
 		Email:    "test@email.com",
 		Phone:    "47712345678",
 		Password: "Test1234",
@@ -39,7 +39,7 @@ func TestGETAuth(t *testing.T) {
 	ah := handler.NewAuthHandler(ai)
 	// We create a ResponseRecorder (which satisfies http.ResponseWriter) to record the response.
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(ah.GETAuth)
+	handler := http.HandlerFunc(ah.Authenticate)
 
 	// Our handlers satisfy http.Handler, so we can call their ServeHTTP method
 	// directly and pass in our Request and ResponseRecorder.

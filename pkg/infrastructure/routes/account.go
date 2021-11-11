@@ -32,13 +32,13 @@ func (aroutes *accountRoutes) setAccountRoutes(ah *handler.AccountHandler) {
 	subRoute.HandleFunc("/welcome", func(rw http.ResponseWriter, r *http.Request) {
 		services.NewResponseHandler().RespondWithSuccess("welcome to account routes", rw)
 	}).Methods(http.MethodGet)
-	subRoute.HandleFunc("/", ah.POSTNewAccount).Methods(http.MethodPost)
-	subRoute.HandleFunc("/status", ah.PUTStatus).Methods(http.MethodPut)
-	subRoute.HandleFunc("/", ah.PUTAccount).Methods(http.MethodPut)
-	subRoute.HandleFunc("/pass", ah.PUTPass).Methods(http.MethodPut)
-	subRoute.HandleFunc("/address", ah.PUTAddress).Methods(http.MethodPut)
-	subRoute.HandleFunc("/client", ah.PUTClient).Methods(http.MethodPut)
-	subRoute.HandleFunc("/", ah.GETAccount).Methods(http.MethodGet)
+	subRoute.HandleFunc("/", ah.Create).Methods(http.MethodPost)
+	subRoute.HandleFunc("/status", ah.ChangeStatus).Methods(http.MethodPut)
+	subRoute.HandleFunc("/", ah.ChangeAccount).Methods(http.MethodPut)
+	subRoute.HandleFunc("/pass", ah.ChangePassword).Methods(http.MethodPut)
+	subRoute.HandleFunc("/address", ah.ChangeAddress).Methods(http.MethodPut)
+	subRoute.HandleFunc("/client", ah.ChangePersonal).Methods(http.MethodPut)
+	subRoute.HandleFunc("/", ah.Index).Methods(http.MethodGet)
 }
 
 func (aroutes *accountRoutes) Set() {

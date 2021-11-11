@@ -1,7 +1,10 @@
 package delivery
 
-type GETAAuth struct {
+// Request
+type Request struct {
 	Email    string `json:"email"`
 	Phone    string `json:"phone"`
 	Password string `json:"password" validate:"required"`
 }
+
+

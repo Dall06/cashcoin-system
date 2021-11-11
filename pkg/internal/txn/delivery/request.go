@@ -9,12 +9,12 @@ type POSTTxn struct {
 	ToAUUID   string  `json:"toAUUID"`
 	Amount    float64 `json:"amount"`
 	Concept   string  `json:"concept"`
+	Reference string  `json:"reference"`
 	Country   string  `json:"country"`
 	City      string  `json:"city"`
 	State     string  `json:"state"`
 	Latitude  float64 `json:"lat"`
 	Longitude float64 `json:"lon"`
-	Reference string  `json:"reference"`
 }
 
 type GETTxns struct {
