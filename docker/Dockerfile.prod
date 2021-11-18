@@ -11,4 +11,4 @@ ENV PORT 8080
 
 RUN go build
 
-CMD [ "./cashcoin-system" ]
+CMD [ "cashcoin-system" ]
