@@ -11,7 +11,7 @@ type Address struct {
 	UUID          string
 	Country       string
 	City          string
-	State         string
+	Estate         string
 	Street        string
 	BuldingNumber int
 	PostalCode    string

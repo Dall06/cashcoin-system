@@ -17,7 +17,7 @@ var tx = &txn.Transaction{
 		UUID:      "de61bb2c-ce92-4523-a545-70c09ab25f5f",
 		Country:   "MEX",
 		City:      "LEON",
-		State:     "GTO",
+		Estate:     "GTO",
 		Latitude:  100.1,
 		Longitude: -304.2134,
 	},

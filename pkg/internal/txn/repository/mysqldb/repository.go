@@ -30,7 +30,7 @@ func (tr *txnRepository) Make(t *txn.Transaction, m map[string]string) (*sql.Res
 		&t.Concept,
 		&t.Location.Country,
 		&t.Location.City,
-		&t.Location.State,
+		&t.Location.Estate,
 		&t.Location.Latitude,
 		&t.Location.Longitude,)
 	if err != nil {
@@ -59,7 +59,7 @@ func (tr *txnRepository) Select(a *txn.Account) (*txn.Transactions, error) {
 			&t.CreatedAt,
 			&t.Concept,
 			&t.Location.City,
-			&t.Location.State,
+			&t.Location.Estate,
 		)
 		if err != nil {
 			return nil, err

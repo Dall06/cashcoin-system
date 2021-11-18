@@ -12,7 +12,7 @@ type POSTTxn struct {
 	Reference string  `json:"reference"`
 	Country   string  `json:"country"`
 	City      string  `json:"city"`
-	State     string  `json:"state"`
+	Estate     string  `json:"estate"`
 	Latitude  float64 `json:"lat"`
 	Longitude float64 `json:"lon"`
 }

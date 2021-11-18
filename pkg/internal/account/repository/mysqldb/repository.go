@@ -20,15 +20,12 @@ func NewAccountRepository(db *sql.DB) usecase.AccountRepository {
 
 func (ur *mysqlAccountRepository) Insert(a *account.Account) (*sql.Result, error) {
 	res, err := ur.DB.Exec(queries.SPInsertAccount,
-		&a.UUID,
-		&a.Client.UUID,
-		&a.Address.UUID,
 		&a.Clabe,
 		&a.Email,
 		&a.Phone,
 		&a.Password,
 		&a.Address.City,
-		&a.Address.State,
+		&a.Address.Estate,
 		&a.Address.Street,
 		&a.Address.BuldingNumber,
 		&a.Address.PostalCode,
@@ -81,7 +78,7 @@ func (ur *mysqlAccountRepository) UpdateAddress(a *account.Account) (*sql.Result
 		&a.Email,
 		&a.Phone,
 		&a.Address.City,
-		&a.Address.State,
+		&a.Address.Estate,
 		&a.Address.Street,
 		&a.Address.BuldingNumber,
 		&a.Address.Country,
@@ -136,7 +133,7 @@ func (ur *mysqlAccountRepository) Select(a *account.Account) (*account.Account, 
 		&res.Client.Name,
 		&res.Client.LastName,
 		&res.Address.City,
-		&res.Address.State,
+		&res.Address.Estate,
 		&res.Address.Country)
 
 	if err != nil {

@@ -74,7 +74,7 @@ func TestPOSTAccount(t *testing.T) {
 		Password:      "Test1234",
 		Country:       "MEX",
 		City:          "LEON",
-		State:         "GTO",
+		Estate:         "GTO",
 		Street:        "AV. U",
 		BuldingNumber: 1,
 		PostalCode:    "36000",

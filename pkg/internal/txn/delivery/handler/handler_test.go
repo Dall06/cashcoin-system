@@ -76,7 +76,7 @@ func TestPOSTNewtxn(t *testing.T) {
 		Concept:   "CONCEPT",
 		Country:   "MEX",
 		City:      "LEON",
-		State:     "GTO",
+		Estate:     "GTO",
 		Latitude:  100.1,
 		Longitude: -304.2134,
 		Reference: "9D03C95643B187537840568E",

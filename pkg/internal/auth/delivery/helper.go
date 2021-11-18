@@ -54,7 +54,7 @@ func (ah *AuthHelper) ValidateAuthResponse(a *auth.Account) (*Account, error) {
 		Clabe:   a.Clabe,
 		Address:  address {
 			City:    a.Address.City,
-			State:   a.Address.State,
+			Estate:   a.Address.Estate,
 			Country: a.Address.Country,
 		},
 		Client: client {

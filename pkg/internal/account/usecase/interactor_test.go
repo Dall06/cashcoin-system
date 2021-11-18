@@ -23,7 +23,7 @@ var a *account.Account = &account.Account{
 		UUID: "44e07ff1-a9a0-4c20-a039-9858cfb06f9f",
 		Country: "MEX",
 		City: "LEON",
-		State: "GTO",
+		Estate: "GTO",
 		Street: "AV. U",
 		BuldingNumber: 1,
 		PostalCode: "36000",

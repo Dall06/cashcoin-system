@@ -7,7 +7,7 @@ type Client struct {
 
 type Address struct {
 	City    string
-	State   string
+	Estate   string
 	Country string
 }
 

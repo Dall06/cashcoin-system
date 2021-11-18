@@ -48,7 +48,7 @@ func (ah *AccountHelper) ValidatePOSTNewAccountRequest(r *http.Request) (*accoun
 		Address: account.Address{
 			UUID:          utils.CheckAndReturn(post.ADDUUID),
 			City:          post.City,
-			State:         post.State,
+			Estate:         post.Estate,
 			Street:        post.Street,
 			BuldingNumber: post.BuldingNumber,
 			Country:       post.Country,
@@ -153,7 +153,7 @@ func (ah *AccountHelper) ValidatePUTAddressRequest(r *http.Request) (*account.Ac
 		Phone: put.Phone,
 		Address: account.Address{
 			City:          put.City,
-			State:         put.State,
+			Estate:         put.Estate,
 			Street:        put.Street,
 			BuldingNumber: put.BuldingNumber,
 			Country:       put.Country,
@@ -217,7 +217,7 @@ func (ah *AccountHelper) ValidateSelectResponse(a *account.Account) (*Account, e
 		Clabe:   a.Clabe,
 		Address: address {
 			City:    a.Address.City,
-			State:   a.Address.State,
+			Estate:   a.Address.Estate,
 			Country: a.Address.Country,
 		},
 		Client: client {

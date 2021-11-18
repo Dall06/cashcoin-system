@@ -24,7 +24,7 @@ var a *account.Account = &account.Account{
 		UUID:          "44e07ff1-a9a0-4c20-a039-9858cfb06f9f",
 		Country:       "MEX",
 		City:          "LEON",
-		State:         "GTO",
+		Estate:         "GTO",
 		Street:        "AV. U",
 		BuldingNumber: 1,
 		PostalCode:    "36000",
@@ -51,7 +51,7 @@ var au = &auth.Account{
 	Address: auth.Address{
 		Country: "MEX",
 		City:    "LEON",
-		State:   "GTO",
+		Estate:   "GTO",
 	},
 	Clabe: "1234567890123456",
 }
@@ -62,7 +62,7 @@ var t = &txn.Transaction{
 		UUID:      "de61bb2c-ce92-4523-a545-70c09ab25f5f",
 		Country:   "MEX",
 		City:      "LEON",
-		State:     "GTO",
+		Estate:     "GTO",
 		Latitude:  100.1,
 		Longitude: -304.2134,
 	},

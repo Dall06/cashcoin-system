@@ -38,7 +38,7 @@ func (tm *txnMock) InsertMock() (*sql.DB, sqlmock.Sqlmock) {
 		&t.Concept,
 		&t.Location.Country,
 		&t.Location.City,
-		&t.Location.State,
+		&t.Location.Estate,
 		&t.Location.Latitude,
 		&t.Location.Longitude,
 	).WillReturnResult(sqlmock.NewResult(0, 0))
@@ -71,7 +71,7 @@ func (tm *txnMock) SelectMock() *sql.DB {
 			&e.CreatedAt,
 			&e.Concept,
 			&e.Location.City,
-			&e.Location.State,
+			&e.Location.Estate,
 		)
 	}
 

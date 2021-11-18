@@ -9,13 +9,13 @@ type ReqCreate struct {
 	Password      string `json:"password" validate:"required"`
 	Clabe          string `json:"clabe"`
 	City          string `json:"city" validate:"required"`
-	State         string `json:"state" validate:"required"`
+	Estate         string `json:"state" validate:"required"`
 	Street        string `json:"street" validate:"required"`
 	BuldingNumber int    `json:"bnum" validate:"required"`
 	Country       string `json:"country" validate:"required"`
 	PostalCode    string `json:"pc" validate:"required"`
 	Name          string `json:"name" validate:"required"`
-	LastName      string `json:"lastName" validate:"required"`
+	LastName      string `json:"lname" validate:"required"`
 	Occupation    string `json:"occupation" validate:"required"`
 }
 
@@ -44,7 +44,7 @@ type ReqAddress struct {
 	Email         string `json:"email" validate:"email"`
 	Phone         string `json:"phone"`
 	City          string `json:"city" validate:"required"`
-	State         string `json:"state" validate:"required"`
+	Estate         string `json:"state" validate:"required"`
 	Street        string `json:"street" validate:"required"`
 	BuldingNumber int    `json:"bnum" validate:"required"`
 	Country       string `json:"country" validate:"required"`
@@ -55,7 +55,7 @@ type ReqPersonal struct {
 	Email      string `json:"email" validate:"required,email"`
 	Phone      string `json:"phone"`
 	Name       string `json:"name" validate:"required"`
-	LastName   string `json:"lastName" validate:"required"`
+	LastName   string `json:"lname" validate:"required"`
 	Occupation string `json:"occupation" validate:"required"`
 }
 

@@ -39,7 +39,7 @@ func (th *HandlerHelper) ValidatePOSTRequest(r *http.Request) (*txn.Transaction,
 			UUID: utils.CheckAndReturn(post.LUUID),
 			Country: post.Country,
 			City: post.City,
-			State: post.State,
+			Estate: post.Estate,
 			Latitude: post.Latitude,
 			Longitude: post.Longitude,
 		},
@@ -80,3 +80,4 @@ func (th *HandlerHelper) ValidateGETRequest(r *http.Request) (*txn.Account, erro
 
 	return &a, nil
 }
+

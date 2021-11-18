@@ -30,7 +30,7 @@ func (ar *mysqlAuthRepository) LogIn(a *auth.Account) (*auth.Account, error) {
 		&aa.Client.Name,
 		&aa.Client.LastName,
 		&aa.Address.City,
-		&aa.Address.State,
+		&aa.Address.Estate,
 		&aa.Address.Country)
 
 	if err != nil {

@@ -6,7 +6,7 @@ type Location struct {
 	UUID      string
 	Country   string
 	City      string
-	State     string
+	Estate     string
 	Latitude  float64
 	Longitude float64
 }

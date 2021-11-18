@@ -24,15 +24,12 @@ func (am *accountMock) InsertMock() (*sql.DB, sqlmock.Sqlmock) {
 	fmt.Println(a.UUID)
 	//mock.ExpectBegin()
 	am.mock.Sqlmock.ExpectExec(regexp.QuoteMeta(queries.SPInsertAccount)).WithArgs(
-		"5f2b9fb0-2720-4b13-b879-441db4577a06",
-		"aa3a2202-b141-432a-8779-75da8cc146a7",
-		"44e07ff1-a9a0-4c20-a039-9858cfb06f9f",
 		&a.Clabe,
 		&a.Email,
 		&a.Phone,
 		&a.Password,
 		&a.Address.City,
-		&a.Address.State,
+		&a.Address.Estate,
 		&a.Address.Street,
 		&a.Address.BuldingNumber,
 		&a.Address.PostalCode,
@@ -78,7 +75,7 @@ func (am *accountMock) UpdateAddressMock() (*sql.DB, sqlmock.Sqlmock) {
 		&a.Email,
 		&a.Phone,
 		&a.Address.City,
-		&a.Address.State,
+		&a.Address.Estate,
 		&a.Address.Street,
 		&a.Address.BuldingNumber,
 		&a.Address.Country,
@@ -138,7 +135,7 @@ func (am *accountMock) SelectMock() *sql.DB {
 		&a.Client.Name,
 		&a.Client.LastName,
 		&a.Address.City,
-		&a.Address.State,
+		&a.Address.Estate,
 		&a.Address.Country,
 	)
 

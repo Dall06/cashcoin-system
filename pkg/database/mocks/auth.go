@@ -42,7 +42,7 @@ func (um *authhMocks) LogInMock() *sql.DB {
 		&au.Client.Name,
 		&au.Client.LastName,
 		&au.Address.City,
-		&au.Address.State,
+		&au.Address.Estate,
 		&au.Address.Country,
 	)
 
