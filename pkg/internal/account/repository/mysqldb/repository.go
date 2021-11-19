@@ -20,6 +20,9 @@ func NewAccountRepository(db *sql.DB) usecase.AccountRepository {
 
 func (ur *mysqlAccountRepository) Insert(a *account.Account) (*sql.Result, error) {
 	res, err := ur.DB.Exec(queries.SPInsertAccount,
+		&a.UUID,
+		&a.Client.UUID,
+		&a.Address.UUID,
 		&a.Clabe,
 		&a.Email,
 		&a.Phone,
