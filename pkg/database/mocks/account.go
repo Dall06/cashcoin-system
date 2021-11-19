@@ -24,6 +24,9 @@ func (am *accountMock) InsertMock() (*sql.DB, sqlmock.Sqlmock) {
 	fmt.Println(a.UUID)
 	//mock.ExpectBegin()
 	am.mock.Sqlmock.ExpectExec(regexp.QuoteMeta(queries.SPInsertAccount)).WithArgs(
+		&a.UUID,
+		&a.Client.UUID,
+		&a.Address.UUID,
 		&a.Clabe,
 		&a.Email,
 		&a.Phone,
