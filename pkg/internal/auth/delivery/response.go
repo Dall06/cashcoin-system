@@ -7,7 +7,7 @@ type client struct {
 
 type address struct {
 	City string `json:"city" validate:"required"`
-	Estate string `json:"state" validate:"required"`
+	Estate string `json:"estate" validate:"required"`
 	Country string `json:"country" validate:"required"`
 }
 
