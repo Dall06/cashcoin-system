@@ -9,7 +9,7 @@ type ReqCreate struct {
 	Password      string `json:"password" validate:"required"`
 	Clabe          string `json:"clabe"`
 	City          string `json:"city" validate:"required"`
-	Estate         string `json:"state" validate:"required"`
+	Estate         string `json:"estate" validate:"required"`
 	Street        string `json:"street" validate:"required"`
 	BuldingNumber int    `json:"bnum" validate:"required"`
 	Country       string `json:"country" validate:"required"`
@@ -44,7 +44,7 @@ type ReqAddress struct {
 	Email         string `json:"email" validate:"email"`
 	Phone         string `json:"phone"`
 	City          string `json:"city" validate:"required"`
-	Estate         string `json:"state" validate:"required"`
+	Estate         string `json:"estate" validate:"required"`
 	Street        string `json:"street" validate:"required"`
 	BuldingNumber int    `json:"bnum" validate:"required"`
 	Country       string `json:"country" validate:"required"`
