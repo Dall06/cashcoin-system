@@ -89,11 +89,13 @@ func (ah *AccountHandler) ChangeStatus(w http.ResponseWriter, r *http.Request) {
 func (ah *AccountHandler) ChangeAccount(w http.ResponseWriter, r *http.Request) {
 	v, err := ah.jwtHandler.ValidateAuthTokenCookie(r)
 	if err != nil {
+		print("nvt")
 		ah.responseHandler.RespondWithInternalServerError(err, w)
 		ah.loggerHandler.LogError("%s", err)
 		return
 	}
 	if !v {
+		print("nv")
 		ah.responseHandler.RespondWithUnauthorized(err, w)
 		ah.loggerHandler.LogError("%s NO VALIDATED", err)
 		return
@@ -101,6 +103,7 @@ func (ah *AccountHandler) ChangeAccount(w http.ResponseWriter, r *http.Request) 
 
 	a, ne, np, err := ah.helper.ValidatePUTAccountRequest(r)
 	if err != nil {
+		print("br")
 		ah.responseHandler.RespondWithBadRequest(err, w)
 		ah.loggerHandler.LogError("%s", err)
 		return
@@ -108,6 +111,7 @@ func (ah *AccountHandler) ChangeAccount(w http.ResponseWriter, r *http.Request) 
 
 	res, err := ah.accountInteractor.Change(a, ne, np)
 	if err != nil {
+		print("esql")
 		ah.responseHandler.RespondWithInternalServerError(err, w)
 		ah.loggerHandler.LogError("%s", err)
 		return

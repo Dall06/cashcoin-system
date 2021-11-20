@@ -68,7 +68,7 @@ func (ah *AccountHelper) ValidatePUTStatusRequest(r *http.Request) (*account.Acc
 		return &a, err
 	}
 
-	err = ah.Validator.Struct(&a)
+	err = ah.Validator.Struct(&put)
 	if err != nil {
 		return &a, err
 	}
