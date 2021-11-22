@@ -69,8 +69,6 @@ var t = &txn.Transaction{
 	Type: "WITHDRAW",
 	Account: txn.Account{
 		UUID: "4df86514-79c2-41c7-812c-57687c7d4593",
-		Email: "test@email.com",
-		Phone: "47712345678",
 	},
 	Reference: "9D03C95643B187537840568E",
 	Amount:    100.00,
@@ -78,9 +76,4 @@ var t = &txn.Transaction{
 	Done:      true,
 	Concept:   "CONCEPT",
 	CreatedAt: time.Now(),
-}
-
-var ta = &txn.Account{
-	Email: "test@email.com",
-	Phone: "47712345678",
 }

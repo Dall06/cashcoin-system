@@ -24,8 +24,6 @@ var tx = &txn.Transaction{
 	Type: "WITHDRAW",
 	Account: txn.Account{
 		UUID: "4df86514-79c2-41c7-812c-57687c7d4593",
-		Email: "test@email.com",
-		Phone: "47712345678",
 	},
 	Reference: "9D03C95643B187537840568E",
 	Amount:    100.00,
@@ -37,8 +35,6 @@ var tx = &txn.Transaction{
 
 var ta = &txn.Account{
 	UUID: "5f2b9fb0-2720-4b13-b879-441db4577a06",
-	Email: "test@email.com",
-	Phone: "47712345678",
 }
 
 var m = map[string]string{}

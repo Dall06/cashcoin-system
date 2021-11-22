@@ -41,3 +41,11 @@
 2021/11/21 22:43:16 Running gracefully
 2021/11/21 22:49:31 Stopping ...
 2021/11/21 22:49:31 Gracefully Stopped
+2021/11/21 23:41:34 Running gracefully
+2021/11/21 23:41:38 127.0.0.1:59470 GET /cashcoin/api/v1/txn/5f2b9fb0-2720-4b13-b879-441db4577a06
+2021/11/21 23:49:08 Stopping ...
+2021/11/21 23:49:08 Gracefully Stopped
+2021/11/21 23:49:11 Running gracefully
+2021/11/21 23:49:14 127.0.0.1:64991 GET /cashcoin/api/v1/txn/5f2b9fb0-2720-4b13-b879-441db4577a06
+2021/11/21 23:49:25 Stopping ...
+2021/11/21 23:49:25 Gracefully Stopped
