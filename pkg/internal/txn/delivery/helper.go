@@ -43,7 +43,7 @@ func (th *HandlerHelper) ValidatePOSTRequest(r *http.Request) (*txn.Transaction,
 			Latitude: post.Latitude,
 			Longitude: post.Longitude,
 		},
-		Reference: utils.CheckReference(post.Reference),
+		Reference: post.Reference,
 		Account: txn.Account{
 			Email: post.Email,
 			Phone: post.Phone,
