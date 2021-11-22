@@ -1,7 +1,6 @@
 package utils_test
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/Dall06/cashcoin-api-mysql/pkg/utils"
@@ -10,14 +9,6 @@ import (
 func TestHashRequestSToken(t *testing.T) {
 	tkn := utils.HashRequestSToken("SECRET")
 	if len(tkn) < 36 {
-		t.Fatal("err lenght")
-	}
-}
-
-func TestCheckReference(t *testing.T) {
-	ref := utils.CheckReference("9D03C95643B187537840568E")
-	if len(ref) < 24 {
-		fmt.Println("lenght", len(ref))
 		t.Fatal("err lenght")
 	}
 }
