@@ -12,7 +12,7 @@ type address struct {
 }
 
 type Account struct {
-	UUID string `json:"uuid" validate:"required"`
+	UUID string `json:"auuid" validate:"required"`
 	Email string `json:"email" validate:"required"`
 	Phone string `json:"phone"`
 	Balance float64 `json:"balance"`

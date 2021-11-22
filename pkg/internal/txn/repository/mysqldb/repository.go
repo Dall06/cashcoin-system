@@ -24,8 +24,6 @@ func (tr *txnRepository) Make(t *txn.Transaction, m map[string]string) (*sql.Res
 		&t.Account.UUID,
 		&t.Location.UUID,
 		&t.Reference,
-		&t.Account.Email,
-		&t.Account.Phone,
 		m["toAUUID"],
 		&t.Amount,
 		&t.Concept,

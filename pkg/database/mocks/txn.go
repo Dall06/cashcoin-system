@@ -32,8 +32,6 @@ func (tm *txnMock) InsertMock() (*sql.DB, sqlmock.Sqlmock) {
 		&t.Account.UUID,
 		&t.Location.UUID,
 		&t.Reference,
-		&t.Account.Email,
-		&t.Account.Phone,
 		m["toAUUID"],
 		&t.Amount,
 		&t.Concept,

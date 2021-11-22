@@ -63,8 +63,6 @@ func TestPOSTNewtxn(t *testing.T) {
 		LUUID:     "de61bb2c-ce92-4523-a545-70c09ab25f5f",
 		DUUID:     "5e3c405c-67b2-44a7-85f4-9f66e20185b9",
 		AUUID:     "4df86514-79c2-41c7-812c-57687c7d4593",
-		Email:     "test@email.com",
-		Phone:     "47712345678",
 		ToAUUID:   "4df86514-79c2-41c7-812c-57687c7d4593",
 		Amount:    100.00,
 		Concept:   "CONCEPT",
@@ -87,7 +85,7 @@ func TestPOSTNewtxn(t *testing.T) {
 	}
 
 	jwt := middleware.NewJWTHandler()
-	tokenString, _, err := jwt.GenerateToken(post.Email, post.Phone)
+	tokenString, _, err := jwt.GenerateToken("test@email.com", "47712345678")
 	if err != nil {
 		t.Fatal(err)
 	}

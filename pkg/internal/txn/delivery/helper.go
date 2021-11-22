@@ -46,8 +46,6 @@ func (th *HandlerHelper) ValidatePOSTRequest(r *http.Request) (*txn.Transaction,
 		Reference: post.Reference,
 		Account: txn.Account{
 			UUID: post.AUUID,
-			Email: post.Email,
-			Phone: post.Phone,
 		},
 		Amount: post.Amount,
 		Concept: post.Concept,
