@@ -130,6 +130,7 @@ func (ur *mysqlAccountRepository) Select(auuid string) (*account.Account, error)
 		&res.Balance,
 		&res.Status,
 		&res.Clabe,
+		&res.LastLogdAt,
 		&res.Client.Name,
 		&res.Client.LastName,
 		&res.Address.City,

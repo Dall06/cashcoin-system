@@ -3,6 +3,7 @@ package usecase_test
 import (
 	"fmt"
 	"testing"
+	"time"
 
 	"github.com/Dall06/cashcoin-api-mysql/pkg/database"
 	"github.com/Dall06/cashcoin-api-mysql/pkg/database/mocks"
@@ -28,6 +29,7 @@ var a *account.Account = &account.Account{
 		BuldingNumber: 1,
 		PostalCode:    "36000",
 	},
+	LastLogdAt: time.Date(2000, time.Month(11), 30, 10, 0, 0, 0, *&time.Local),
 	Email:    "test@email.com",
 	Phone:    "47712345678",
 	Password: "Test1234",

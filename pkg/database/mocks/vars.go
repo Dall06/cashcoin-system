@@ -20,6 +20,7 @@ var a *account.Account = &account.Account{
 		LastName:   "Tested",
 		Occupation: "Tester",
 	},
+	LastLogdAt: time.Date(2000, time.Month(11), 30, 10, 0, 0, 0, *&time.Local),
 	Address: account.Address{
 		UUID:          "44e07ff1-a9a0-4c20-a039-9858cfb06f9f",
 		Country:       "MEX",
@@ -44,6 +45,7 @@ var au = &auth.Account{
 	Password: "Test123",
 	Balance:  1000.00,
 	Status:   "ACTIVE",
+	LastLogdAt: time.Date(2000, time.Month(11), 30, 10, 0, 0, 0, *&time.Local),
 	Client: auth.Client{
 		Name:     "Test",
 		LastName: "Tested",

@@ -57,6 +57,7 @@ func (ah *AuthHelper) ValidateAuthResponse(a *auth.Account) (*Account, error) {
 			Estate:   a.Address.Estate,
 			Country: a.Address.Country,
 		},
+		LastLogAt: a.LastLogdAt,
 		Client: client {
 			Name:     a.Client.Name,
 			LastName: a.Client.LastName,

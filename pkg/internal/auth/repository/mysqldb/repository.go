@@ -27,6 +27,7 @@ func (ar *mysqlAuthRepository) LogIn(a *auth.Account) (*auth.Account, error) {
 		&aa.Balance,
 		&aa.Status,
 		&aa.Clabe,
+		&aa.LastLogdAt,
 		&aa.Client.Name,
 		&aa.Client.LastName,
 		&aa.Address.City,
