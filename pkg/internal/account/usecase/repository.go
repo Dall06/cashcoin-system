@@ -14,5 +14,5 @@ type AccountRepository interface {
 	UpdateAddress(*account.Account) (*sql.Result, error)
 	UpdatePassword(*account.Account, string) (*sql.Result, error)
 	UpdateClient(*account.Account) (*sql.Result, error)
-	Select(*account.Account) (*account.Account, error)
+	Select(string) (*account.Account, error)
 }

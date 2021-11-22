@@ -47,7 +47,7 @@ func (ai *AccountInteractor) ChangeClient(a *account.Account) (result *sql.Resul
 	return
 }
 
-func (ai *AccountInteractor) Index(a *account.Account) (acc *account.Account, err error) {
-	acc, err = ai.accountRepository.Select(a)
+func (ai *AccountInteractor) Index(uuid string) (acc *account.Account, err error) {
+	acc, err = ai.accountRepository.Select(uuid)
 	return
 }

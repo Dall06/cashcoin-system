@@ -34,7 +34,7 @@ func (th *HandlerHelper) ValidatePOSTRequest(r *http.Request) (*txn.Transaction,
 	}
 
 	t = txn.Transaction {
-		UUID: utils.CheckAndReturn(post.UUID),
+		UUID: utils.CheckAndReturn(post.WUUID),
 		Location: txn.Location{
 			UUID: utils.CheckAndReturn(post.LUUID),
 			Country: post.Country,
@@ -45,6 +45,7 @@ func (th *HandlerHelper) ValidatePOSTRequest(r *http.Request) (*txn.Transaction,
 		},
 		Reference: post.Reference,
 		Account: txn.Account{
+			UUID: post.AUUID,
 			Email: post.Email,
 			Phone: post.Phone,
 		},
@@ -53,31 +54,9 @@ func (th *HandlerHelper) ValidatePOSTRequest(r *http.Request) (*txn.Transaction,
 	}
 
 	m := make(map[string]string)
-	m["toTxnUUID"] = utils.CheckAndReturn(post.ToTxnUUID)
+	m["d_txnuuid"] = utils.CheckAndReturn(post.DUUID)
 	m["toAUUID"] = post.ToAUUID
 
 	return &t, m, nil
-}
-
-func (th *HandlerHelper) ValidateGETRequest(r *http.Request) (*txn.Account, error) {
-	var get GETTxns
-	var a txn.Account
-
-	err := json.NewDecoder(r.Body).Decode(&get)
-	if err != nil {
-		return &a, err
-	}
-
-	err = th.Validator.Struct(get)
-	if err != nil {
-		return &a, err
-	}
-
-	a = txn.Account{
-		Email: get.Email,
-		Phone: get.Phone,
-	}
-
-	return &a, nil
 }
 

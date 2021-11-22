@@ -10,6 +10,7 @@ import (
 	"github.com/Dall06/cashcoin-api-mysql/pkg/internal/account"
 	"github.com/Dall06/cashcoin-api-mysql/pkg/internal/account/delivery"
 	"github.com/Dall06/cashcoin-api-mysql/pkg/internal/account/usecase"
+	"github.com/gorilla/mux"
 	"github.com/patrickmn/go-cache"
 )
 
@@ -227,14 +228,15 @@ func (ah *AccountHandler) Index(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	rreq, err := ah.helper.ValidateGETAccountRequest(r)
-	if err != nil {
-		ah.responseHandler.RespondWithBadRequest(err, w)
-		ah.loggerHandler.LogError("%s", err)
+	var params = mux.Vars(r)
+	var uuid = params["uuid"]
+	if uuid == "" {
+		ah.loggerHandler.LogError("%s", "empty uuid: " + uuid)
+		ah.responseHandler.RespondWithInternalServerError("empty uuid: " + uuid, w)
 		return
 	}
 
-	key := fmt.Sprintf("acc=email:auuid%s,%s", rreq.Email, rreq.UUID)
+	key := fmt.Sprintf("acc=auuid%s", uuid)
 	if item, found := ah.cache.Get(key); found {
 		res := item.(account.Account)
 		ah.loggerHandler.LogAccess("%s %s %s \n", r.RemoteAddr, r.Method, r.URL)
@@ -242,7 +244,7 @@ func (ah *AccountHandler) Index(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	a, err := ah.accountInteractor.Index(rreq)
+	a, err := ah.accountInteractor.Index(uuid)
 	if err != nil {
 		ah.responseHandler.RespondWithInternalServerError(err, w)
 		ah.loggerHandler.LogError("%s", err)

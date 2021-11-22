@@ -24,3 +24,20 @@
 2021/11/18 15:34:28 192.168.1.239:55171 POST /cashcoin/api/v1/auth/
 2021/11/18 15:39:34 Stopping ...
 2021/11/18 15:39:34 Gracefully Stopped
+2021/11/21 22:32:32 Running gracefully
+2021/11/21 22:32:59 Stopping ...
+2021/11/21 22:32:59 Gracefully Stopped
+2021/11/21 22:33:04 Running gracefully
+2021/11/21 22:36:24 127.0.0.1:62772 GET /cashcoin/api/v1/txn/5f2b9fb0-2720-4b13-b879-441db4577a06
+2021/11/21 22:39:59 Stopping ...
+2021/11/21 22:39:59 Gracefully Stopped
+2021/11/21 22:40:01 Running gracefully
+2021/11/21 22:40:05 127.0.0.1:59439 GET /cashcoin/api/v1/txn/5f2b9fb0-2720-4b13-b879-441db4577a06
+2021/11/21 22:42:17 127.0.0.1:59515 POST /cashcoin/api/v1/auth/
+2021/11/21 22:42:46 127.0.0.1:59533 GET /cashcoin/api/v1/txn/5f2b9fb0-2720-4b13-b879-441db4577a06
+2021/11/21 22:43:01 127.0.0.1:59541 GET /cashcoin/api/v1/txn/5f2b9fb0-2720-4b13-b879-441db4577a06
+2021/11/21 22:43:11 Stopping ...
+2021/11/21 22:43:11 Gracefully Stopped
+2021/11/21 22:43:16 Running gracefully
+2021/11/21 22:49:31 Stopping ...
+2021/11/21 22:49:31 Gracefully Stopped

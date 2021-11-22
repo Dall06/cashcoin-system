@@ -20,7 +20,8 @@ func NewTxnRepository(db *sql.DB) usecase.TxnRepository {
 func (tr *txnRepository) Make(t *txn.Transaction, m map[string]string) (*sql.Result, error) {
 	res, err := tr.DB.Exec(queries.SPMakeTxn, // queri of cashcoin AddPsword
 		&t.UUID,
-		m["toTxnUUID"],
+		m["d_txnuuid"],
+		&t.Account.UUID,
 		&t.Location.UUID,
 		&t.Reference,
 		&t.Account.Email,
@@ -41,10 +42,10 @@ func (tr *txnRepository) Make(t *txn.Transaction, m map[string]string) (*sql.Res
 	return &res, nil
 }
 
-func (tr *txnRepository) Select(a *txn.Account) (*txn.Transactions, error) {
+func (tr *txnRepository) Select(uuid string) (*txn.Transactions, error) {
 	var ts txn.Transactions
 
-	rows, err := tr.DB.Query(queries.SPSelectTxns, a.Email, a.Phone)
+	rows, err := tr.DB.Query(queries.SPSelectTxns, uuid)
 	if err != nil {
 		return nil, err
 	}

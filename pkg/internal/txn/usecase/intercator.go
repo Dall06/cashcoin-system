@@ -21,7 +21,7 @@ func (ti *TxnInteractor) Do(txn *txn.Transaction, m map[string]string) (res *sql
 	return
 }
 
-func (ti *TxnInteractor) Index(a *txn.Account) (res *txn.Transactions, err error) {
-	res, err = ti.TxnRepository.Select(a)
+func (ti *TxnInteractor) Index(uuid string) (res *txn.Transactions, err error) {
+	res, err = ti.TxnRepository.Select(uuid)
 	return
 }

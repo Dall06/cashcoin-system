@@ -12,6 +12,7 @@ type Location struct {
 }
 
 type Account struct {
+	UUID string
 	Email string
 	Phone string
 }

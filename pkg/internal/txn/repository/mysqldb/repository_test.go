@@ -23,6 +23,7 @@ var tx = &txn.Transaction{
 	},
 	Type: "WITHDRAW",
 	Account: txn.Account{
+		UUID: "4df86514-79c2-41c7-812c-57687c7d4593",
 		Email: "test@email.com",
 		Phone: "47712345678",
 	},
@@ -35,6 +36,7 @@ var tx = &txn.Transaction{
 }
 
 var ta = &txn.Account{
+	UUID: "5f2b9fb0-2720-4b13-b879-441db4577a06",
 	Email: "test@email.com",
 	Phone: "47712345678",
 }
@@ -42,7 +44,7 @@ var ta = &txn.Account{
 var m = map[string]string{}
 
 func TestInsert(t *testing.T) {
-	m["toTxnUUID"] = "5e3c405c-67b2-44a7-85f4-9f66e20185b9"
+	m["d_txnuuid"] = "5e3c405c-67b2-44a7-85f4-9f66e20185b9"
 	m["toAUUID"] = "4df86514-79c2-41c7-812c-57687c7d4593"
 	
 	mdb := database.NewMock()
@@ -64,7 +66,7 @@ func TestSelectPsss(t *testing.T) {
 	db := mocks.NewTxnMock(mdb).SelectMock()
 
 	pr := mysqldb.NewTxnRepository(db)
-	res, err := pr.Select(ta)
+	res, err := pr.Select(ta.UUID)
 
 	fmt.Println("ERROR ", err)
 	fmt.Println("USER ", res)

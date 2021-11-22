@@ -12,28 +12,28 @@ import (
 )
 
 var a *account.Account = &account.Account{
-	UUID:     "5f2b9fb0-2720-4b13-b879-441db4577a06",
-	Client:   account.Client{
-		UUID: "aa3a2202-b141-432a-8779-75da8cc146a7",
-		Name: "Test",
-		LastName: "Tested",
+	UUID: "5f2b9fb0-2720-4b13-b879-441db4577a06",
+	Client: account.Client{
+		UUID:       "aa3a2202-b141-432a-8779-75da8cc146a7",
+		Name:       "Test",
+		LastName:   "Tested",
 		Occupation: "Tester",
 	},
-	Address:  account.Address{
-		UUID: "44e07ff1-a9a0-4c20-a039-9858cfb06f9f",
-		Country: "MEX",
-		City: "LEON",
-		Estate: "GTO",
-		Street: "AV. U",
+	Address: account.Address{
+		UUID:          "44e07ff1-a9a0-4c20-a039-9858cfb06f9f",
+		Country:       "MEX",
+		City:          "LEON",
+		Estate:        "GTO",
+		Street:        "AV. U",
 		BuldingNumber: 1,
-		PostalCode: "36000",
+		PostalCode:    "36000",
 	},
 	Email:    "test@email.com",
 	Phone:    "47712345678",
 	Password: "Test1234",
 	Balance:  1000.00,
-	Status: "ACTIVE",
-	Clabe: "1234567890123456",
+	Status:   "ACTIVE",
+	Clabe:    "1234567890123456",
 }
 
 func TestIndex(t *testing.T) {
@@ -43,7 +43,7 @@ func TestIndex(t *testing.T) {
 	ar := mysqldb.NewAccountRepository(db)
 	ai := usecase.NewAccountInteractor(ar)
 
-	res, err := ai.Index(a)
+	res, err := ai.Index(a.UUID)
 
 	if err != nil {
 		t.Fatal(err)

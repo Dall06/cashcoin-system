@@ -1,9 +1,9 @@
 package delivery
 
 type ReqCreate struct {
-	UUID		string `json:"AUUID"`
-	CUUID		string `json:"CUUID"`
-	ADDUUID		string `json:"ADDUUID"`
+	AUUID		string `json:"auuid"`
+	CUUID		string `json:"cuuid"`
+	ADDUUID		string `json:"adduuid"`
 	Email         string `json:"email" validate:"required,email"`
 	Phone         string `json:"phone"`
 	Password      string `json:"password" validate:"required"`
@@ -20,8 +20,7 @@ type ReqCreate struct {
 }
 
 type ReqStatus struct {
-	Email  string `json:"email" validate:"email"`
-	Phone  string `json:"phone"`
+	AUUID		string `json:"auuid" validate:"required"`
 	Status string `json:"status" validate:"required"`
 }
 
@@ -41,8 +40,7 @@ type ReqPassword struct {
 }
 
 type ReqAddress struct {
-	Email         string `json:"email" validate:"email"`
-	Phone         string `json:"phone"`
+	AUUID		string `json:"auuid" validate:"required"`
 	City          string `json:"city" validate:"required"`
 	Estate         string `json:"estate" validate:"required"`
 	Street        string `json:"street" validate:"required"`
@@ -52,16 +50,14 @@ type ReqAddress struct {
 }
 
 type ReqPersonal struct {
-	Email      string `json:"email" validate:"required,email"`
-	Phone      string `json:"phone"`
+	AUUID		string `json:"auuid" validate:"required"`
 	Name       string `json:"name" validate:"required"`
 	LastName   string `json:"lname" validate:"required"`
 	Occupation string `json:"occupation" validate:"required"`
 }
 
 type ReqIndex struct {
-	Email string `json:"email" validate:"email"`
-	Phone string `json:"phone"`
+	AUUID		string `json:"auuid" validate:"required"`
 }
 
 

@@ -56,7 +56,7 @@ func (ah *AuthHandler) Authenticate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	key := fmt.Sprintf("acc=email:auuid%s,%s", res.Email, res.UUID)
+	key := fmt.Sprintf("acc=auuid%s", res.UUID)
 	err = ah.cache.Add(key, res, defaultExpirationCache)
 	if err != nil {
 		ah.responseHandler.RespondWithInternalServerError(err, w)

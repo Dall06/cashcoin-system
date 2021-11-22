@@ -23,12 +23,13 @@ func NewTxnMock(m *database.Mock) *txnMock {
 func (tm *txnMock) InsertMock() (*sql.DB, sqlmock.Sqlmock) {
 	var m = map[string]string{}
 
-	m["toTxnUUID"] = "5e3c405c-67b2-44a7-85f4-9f66e20185b9"
+	m["d_txnuuid"] = "5e3c405c-67b2-44a7-85f4-9f66e20185b9"
 	m["toAUUID"] = "4df86514-79c2-41c7-812c-57687c7d4593"
 
 	tm.mock.Sqlmock.ExpectExec(regexp.QuoteMeta(queries.SPMakeTxn)).WithArgs(
 		&t.UUID,
-		m["toTxnUUID"],
+		m["d_txnuuid"],
+		&t.Account.UUID,
 		&t.Location.UUID,
 		&t.Reference,
 		&t.Account.Email,
@@ -76,7 +77,7 @@ func (tm *txnMock) SelectMock() *sql.DB {
 	}
 
 	tm.mock.Sqlmock.ExpectQuery(regexp.QuoteMeta(queries.SPSelectTxns)).
-		WithArgs(a.Email, a.Phone).
+		WithArgs(a.UUID).
 		WillReturnRows(rows)
 
 	return tm.mock.DB

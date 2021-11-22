@@ -7,6 +7,7 @@ import (
 	"github.com/Dall06/cashcoin-api-mysql/pkg/infrastructure/services"
 	"github.com/Dall06/cashcoin-api-mysql/pkg/internal/txn/delivery"
 	"github.com/Dall06/cashcoin-api-mysql/pkg/internal/txn/usecase"
+	"github.com/gorilla/mux"
 )
 
 type TxnHandler struct {
@@ -32,22 +33,26 @@ func (th *TxnHandler) Make(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		th.ResponseHandler.RespondWithInternalServerError(err, w)
 		th.LoggerHandler.LogError("%s", err)
+		return
 	}
 	if !v {
 		th.ResponseHandler.RespondWithUnauthorized(err, w)
 		th.LoggerHandler.LogError("%s NO VALIDATED", err)
+		return
 	}
 
 	t, m, err := th.HandlerHelper.ValidatePOSTRequest(r)
 	if err != nil {
 		th.LoggerHandler.LogError("%s", err)
 		th.ResponseHandler.RespondWithInternalServerError(err, w)
+		return
 	}
 
 	res, err := th.TxnInteractor.Do(t, m)
 	if err != nil {
 		th.LoggerHandler.LogError("%s", err)
 		th.ResponseHandler.RespondWithInternalServerError(err, w)
+		return
 	}
 
 	th.LoggerHandler.LogAccess("%s %s %s\n", r.RemoteAddr, r.Method, r.URL)
@@ -59,23 +64,28 @@ func (th *TxnHandler) IndexTxns(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		th.ResponseHandler.RespondWithInternalServerError(err, w)
 		th.LoggerHandler.LogError("%s", err)
+		return
 	}
 	if !v {
 		th.ResponseHandler.RespondWithUnauthorized(err, w)
 		th.LoggerHandler.LogError("%s NO VALIDATED", err)
+		return
 	}
 
-	a, err := th.HandlerHelper.ValidateGETRequest(r)
+	var params = mux.Vars(r)
+	var uuid = params["uuid"]
+	if uuid == "" {
+		th.LoggerHandler.LogError("%s", "empty uuid: " + uuid)
+		th.ResponseHandler.RespondWithInternalServerError("empty uuid: " + uuid, w)
+		return
+	}
+
+	res, err := th.TxnInteractor.Index(uuid)
+
 	if err != nil {
 		th.LoggerHandler.LogError("%s", err)
 		th.ResponseHandler.RespondWithInternalServerError(err, w)
-	}
-
-	res, err := th.TxnInteractor.Index(a)
-
-	if err != nil {
-		th.LoggerHandler.LogError("%s", err)
-		th.ResponseHandler.RespondWithInternalServerError(err, w)
+		return
 	}
 
 	th.LoggerHandler.LogAccess("%s %s %s\n", r.RemoteAddr, r.Method, r.URL)

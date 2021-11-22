@@ -49,9 +49,8 @@ func (am *accountMock) InsertMock() (*sql.DB, sqlmock.Sqlmock) {
 func (am *accountMock) UpdateStatusMock() (*sql.DB, sqlmock.Sqlmock) {
 	//mock.ExpectBegin()
 	am.mock.Sqlmock.ExpectExec(regexp.QuoteMeta(queries.SPUpdateStatus)).WithArgs(
-		&a.Email,
-		&a.Phone,
 		&a.Status,
+		&a.UUID,
 	).WillReturnResult(sqlmock.NewResult(0, 0))
 	//mock.ExpectCommit()
 
@@ -75,8 +74,7 @@ func (am *accountMock) UpdateAccountMock() (*sql.DB, sqlmock.Sqlmock) {
 func (am *accountMock) UpdateAddressMock() (*sql.DB, sqlmock.Sqlmock) {
 	//mock.ExpectBegin()
 	am.mock.Sqlmock.ExpectExec(regexp.QuoteMeta(queries.SPUpdateAddress)).WithArgs(
-		&a.Email,
-		&a.Phone,
+		&a.UUID,
 		&a.Address.City,
 		&a.Address.Estate,
 		&a.Address.Street,
@@ -104,11 +102,10 @@ func (am *accountMock) UpdatePasswordMock() (*sql.DB, sqlmock.Sqlmock) {
 
 func (am *accountMock) UpdateClientMock() (*sql.DB, sqlmock.Sqlmock) {
 	am.mock.Sqlmock.ExpectExec(regexp.QuoteMeta(queries.SPUpdateClient)).WithArgs(
-		&a.Email,
-		&a.Phone,
 		&a.Client.Name,
 		&a.Client.LastName,
 		&a.Client.Occupation,
+		&a.UUID,
 	).WillReturnResult(sqlmock.NewResult(0, 0))
 	//mock.ExpectCommit()
 
@@ -143,7 +140,7 @@ func (am *accountMock) SelectMock() *sql.DB {
 	)
 
 	am.mock.Sqlmock.ExpectQuery(regexp.QuoteMeta(queries.SPSelectAccount)).
-		WithArgs(&a.Email, &a.Phone).
+		WithArgs(&a.UUID).
 		WillReturnRows(rows)
 
 	return am.mock.DB

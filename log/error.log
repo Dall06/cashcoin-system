@@ -4,3 +4,10 @@
 2021/11/18 14:54:58 sql: expected 10 destination arguments in Scan, not 11
 2021/11/18 14:56:56 Key: 'Account.Balance' Error:Field validation for 'Balance' failed on the 'required' tag
 2021/11/18 14:58:28 Key: 'Account.Balance' Error:Field validation for 'Balance' failed on the 'required' tag
+2021/11/21 22:36:23 http: named cookie not present
+2021/11/21 22:36:23 http: named cookie not present NO VALIDATED
+2021/11/21 22:36:24 Error 1049: Unknown database 'pssword'
+2021/11/21 22:40:04 http: named cookie not present
+2021/11/21 22:40:04 http: named cookie not present NO VALIDATED
+2021/11/21 22:42:46 http: named cookie not present
+2021/11/21 22:42:46 http: named cookie not present NO VALIDATED

@@ -41,7 +41,7 @@ func TestSelect(t *testing.T) {
 	db := mocks.NewAccountMock(mdb).SelectMock()
 
 	ar := mysqldb.NewAccountRepository(db)
-	res, err := ar.Select(a)
+	res, err := ar.Select(a.UUID)
 
 	fmt.Println("ERROR ", err)
 	fmt.Println("USER ", res)

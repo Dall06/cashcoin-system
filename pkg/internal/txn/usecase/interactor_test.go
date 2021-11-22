@@ -23,7 +23,8 @@ var tx = &txn.Transaction{
 		Longitude: -304.2134,
 	},
 	Type: "WITHDRAW",
-	Account: txn.Account{
+	Account: txn.Account{		
+		UUID: "4df86514-79c2-41c7-812c-57687c7d4593",
 		Email: "test@email.com",
 		Phone: "47712345678",
 	},
@@ -36,6 +37,7 @@ var tx = &txn.Transaction{
 }
 
 var ta = &txn.Account{
+	UUID: "5f2b9fb0-2720-4b13-b879-441db4577a06",
 	Email: "test@email.com",
 	Phone: "47712345678",
 }
@@ -43,7 +45,7 @@ var ta = &txn.Account{
 var m = map[string]string{}
 
 func TestDo(t *testing.T) {
-	m["toTxnUUID"] = "5e3c405c-67b2-44a7-85f4-9f66e20185b9"
+	m["d_txnuuid"] = "5e3c405c-67b2-44a7-85f4-9f66e20185b9"
 	m["toAUUID"] = "4df86514-79c2-41c7-812c-57687c7d4593"
 
 	mdb := database.NewMock()
@@ -68,7 +70,7 @@ func TestIndex(t *testing.T) {
 	pr := mysqldb.NewTxnRepository(db)
 	pi := usecase.NewTxnInteractor(pr)
 
-	res, err := pi.Index(ta)
+	res, err := pi.Index(ta.UUID)
 
 	if err != nil {
 		t.Fatal(err)

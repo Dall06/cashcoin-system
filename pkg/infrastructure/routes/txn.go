@@ -32,7 +32,7 @@ func (pr *txnRoutes) setTxnRoutes(ph *handler.TxnHandler) {
 	subRoute.HandleFunc("/welcome", func(rw http.ResponseWriter, r *http.Request) {
 		services.NewResponseHandler().RespondWithSuccess("welcome to cashcoin routes", rw)
 	}).Methods(http.MethodGet)
-	subRoute.HandleFunc("/", ph.IndexTxns).Methods(http.MethodGet)
+	subRoute.HandleFunc("/{uuid}", ph.IndexTxns).Methods(http.MethodGet)
 	subRoute.HandleFunc("/", ph.Make).Methods(http.MethodPost)
 }
 

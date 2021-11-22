@@ -68,6 +68,7 @@ var t = &txn.Transaction{
 	},
 	Type: "WITHDRAW",
 	Account: txn.Account{
+		UUID: "4df86514-79c2-41c7-812c-57687c7d4593",
 		Email: "test@email.com",
 		Phone: "47712345678",
 	},

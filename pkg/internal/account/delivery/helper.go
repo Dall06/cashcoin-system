@@ -34,7 +34,7 @@ func (ah *AccountHelper) ValidatePOSTNewAccountRequest(r *http.Request) (*accoun
 	}
 
 	a = account.Account{
-		UUID:     utils.CheckAndReturn(post.UUID),
+		UUID:     utils.CheckAndReturn(post.AUUID),
 		Email:    post.Email,
 		Phone:    post.Phone,
 		Password: post.Password,
@@ -74,8 +74,7 @@ func (ah *AccountHelper) ValidatePUTStatusRequest(r *http.Request) (*account.Acc
 	}
 
 	a = account.Account{
-		Email:  put.Email,
-		Phone:  put.Phone,
+		UUID:  put.AUUID,
 		Status: put.Status,
 	}
 
@@ -149,8 +148,7 @@ func (ah *AccountHelper) ValidatePUTAddressRequest(r *http.Request) (*account.Ac
 	}
 
 	a = account.Account{
-		Email: put.Email,
-		Phone: put.Phone,
+		UUID: put.AUUID,
 		Address: account.Address{
 			City:          put.City,
 			Estate:         put.Estate,
@@ -179,8 +177,7 @@ func (ah *AccountHelper) ValidatePUTClientRequest(r *http.Request) (*account.Acc
 	}
 
 	a = account.Account{
-		Email: put.Email,
-		Phone: put.Phone,
+		UUID: put.AUUID,
 		Client: account.Client{
 			Name:       put.Name,
 			LastName:   put.LastName,
@@ -188,23 +185,6 @@ func (ah *AccountHelper) ValidatePUTClientRequest(r *http.Request) (*account.Acc
 		},
 	}
 	return &a, err
-}
-
-func (ah *AccountHelper) ValidateGETAccountRequest(r *http.Request) (*account.Account, error) {
-	var get ReqIndex
-	var a account.Account
-
-	err := json.NewDecoder(r.Body).Decode(&get)
-	if err != nil {
-		return &a, nil
-	}
-
-	a = account.Account{
-		Email: get.Email,
-		Phone: get.Phone,
-	}
-
-	return &a, nil
 }
 
 func (ah *AccountHelper) ValidateSelectResponse(a *account.Account) (*Account, error) {

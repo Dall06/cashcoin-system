@@ -47,9 +47,8 @@ func (ur *mysqlAccountRepository) Insert(a *account.Account) (*sql.Result, error
 
 func (ur *mysqlAccountRepository) UpdateStatus(a *account.Account) (*sql.Result, error) {
 	res, err := ur.DB.Exec(queries.SPUpdateStatus,
-		&a.Email,
-		&a.Phone,
-		&a.Status)
+		&a.Status,
+		&a.UUID,)
 
 	if err != nil {
 		
@@ -78,8 +77,7 @@ func (ur *mysqlAccountRepository) Update(a *account.Account, ne string, np strin
 
 func (ur *mysqlAccountRepository) UpdateAddress(a *account.Account) (*sql.Result, error) {
 	res, err := ur.DB.Exec(queries.SPUpdateAddress,
-		&a.Email,
-		&a.Phone,
+		&a.UUID,
 		&a.Address.City,
 		&a.Address.Estate,
 		&a.Address.Street,
@@ -110,11 +108,10 @@ func (ur *mysqlAccountRepository) UpdatePassword(a *account.Account, np string) 
 
 func (ur *mysqlAccountRepository) UpdateClient(a *account.Account) (*sql.Result, error) {
 	res, err := ur.DB.Exec(queries.SPUpdateClient,
-		&a.Email,
-		&a.Phone,
 		&a.Client.Name,
 		&a.Client.LastName,
-		&a.Client.Occupation)
+		&a.Client.Occupation,
+		&a.UUID,)
 
 	if err != nil {
 		return nil, err
@@ -123,10 +120,10 @@ func (ur *mysqlAccountRepository) UpdateClient(a *account.Account) (*sql.Result,
 	return &res, nil
 }
 
-func (ur *mysqlAccountRepository) Select(a *account.Account) (*account.Account, error) {
+func (ur *mysqlAccountRepository) Select(auuid string) (*account.Account, error) {
 	var res account.Account
 
-	err := ur.DB.QueryRow(queries.SPSelectAccount, a.Email, a.Phone).Scan(
+	err := ur.DB.QueryRow(queries.SPSelectAccount, auuid).Scan(
 		&res.UUID,
 		&res.Email,
 		&res.Phone,
