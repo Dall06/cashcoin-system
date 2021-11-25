@@ -195,6 +195,7 @@ func (ah *AccountHelper) ValidateSelectResponse(a *account.Account) (*Account, e
 		Balance: a.Balance,
 		Status:  a.Status,
 		Clabe:   a.Clabe,
+		LastLogAt: a.LastLogdAt,
 		Address: address {
 			City:    a.Address.City,
 			Estate:   a.Address.Estate,
