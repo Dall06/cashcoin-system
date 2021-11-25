@@ -65,7 +65,7 @@ func (ah *AuthHandler) Authenticate(w http.ResponseWriter, r *http.Request) {
 	}
 
 
-	err = ah.jwtHandler.SetAuthTokenCookie(w, res.Email, res.Phone)
+	err = ah.jwtHandler.SetAuthTokenCookie(w, res.Email, res.Phone, res.UUID)
 	if err != nil {
 		ah.responseHandler.RespondWithInternalServerError(err, w)
 		ah.loggerHandler.LogError("%s Cannot create token", err)

@@ -11,6 +11,7 @@ import (
 var jwtKey = []byte(config.SecretPassword)
 
 type claims struct {
+	UUID string
 	Email string
 	Phone string
 	SToken string
@@ -23,11 +24,12 @@ func NewJWTHandler() *JWTHandler {
 	return &JWTHandler{}
 }
 
-func (j *JWTHandler) GenerateToken(email string, phone string) (string, time.Time, error) {
+func (j *JWTHandler) GenerateToken(email string, phone string, uuid string) (string, time.Time, error) {
 	expirationTime := time.Now().Add(time.Hour * 8)
 	st := config.SessionToken
 	// Setting up token
 	claims := &claims{
+		UUID: uuid,
 		Email: email,
 		Phone: phone,
 		SToken: st,
@@ -66,8 +68,8 @@ func (j *JWTHandler) GenerateSToken(email string, phone string) (string, time.Ti
 	return tokenString, expirationTime, nil
 }
 
-func (j *JWTHandler) SetAuthTokenCookie(w http.ResponseWriter, e string, p string) error {
-	tokenString, expirationTime, err := j.GenerateToken(e, p)
+func (j *JWTHandler) SetAuthTokenCookie(w http.ResponseWriter, e string, p string, uid string) error {
+	tokenString, expirationTime, err := j.GenerateToken(e, p, uid)
 	// if error when creating token retunr Internal Server Error
 	if err != nil {
 		return err

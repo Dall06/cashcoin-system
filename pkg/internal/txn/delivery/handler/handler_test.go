@@ -85,7 +85,7 @@ func TestPOSTNewtxn(t *testing.T) {
 	}
 
 	jwt := middleware.NewJWTHandler()
-	tokenString, _, err := jwt.GenerateToken("test@email.com", "47712345678")
+	tokenString, _, err := jwt.GenerateToken("test@email.com", "47712345678", "4df86514-79c2-41c7-812c-57687c7d4593",)
 	if err != nil {
 		t.Fatal(err)
 	}
