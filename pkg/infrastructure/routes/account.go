@@ -38,7 +38,7 @@ func (aroutes *accountRoutes) setAccountRoutes(ah *handler.AccountHandler) {
 	subRoute.HandleFunc("/pass", ah.ChangePassword).Methods(http.MethodPut)
 	subRoute.HandleFunc("/address", ah.ChangeAddress).Methods(http.MethodPut)
 	subRoute.HandleFunc("/client", ah.ChangePersonal).Methods(http.MethodPut)
-	subRoute.HandleFunc("/", ah.Index).Methods(http.MethodGet)
+	subRoute.HandleFunc("/{uuid}", ah.Index).Methods(http.MethodGet)
 }
 
 func (aroutes *accountRoutes) Set() {
