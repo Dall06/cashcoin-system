@@ -19,24 +19,22 @@ class AccountApiRepository implements ApiRepository {
     /*jsonDecode(response.body)*/
     try {
       final current = await _session.returnSession();
-      final sessionMap = jsonDecode(current!) as Map<String, dynamic>;
-      final tkn = await _jwt.returnTkn();
-      String uuid = "";
-
-      if (sessionMap.isNotEmpty && current != "") {
-        return Account.fromMap(sessionMap);
+      if (current != null) {
+        final sessionMap = jsonDecode(current) as Map<String, dynamic>;
+        if (sessionMap.isNotEmpty) {
+          return Account.fromMap(sessionMap);
+        }
       }
+      final tkn = await _jwt.returnTkn();
 
       if (tkn == "") {
         throw Exception("empty token");
       }
 
-      if (sessionMap['auuid'] == "") {
-        throw Exception("empty session");
-      }
-      uuid = sessionMap['auuid'];
+      final Map<String, dynamic> decodeTkn = JwtDecoder.decode(tkn!);
+      final String uuid = decodeTkn['UUID'];
       //final req = authHelper.toReq(account);
-      final uri = Uri.http(apiRoute, "/account/$uuid");
+      final uri = Uri.parse(apiRoute + "/account/$uuid");
       final headers = {
         HttpHeaders.contentTypeHeader: "application/json",
         "X-Session-Token": "00000000",
@@ -47,6 +45,7 @@ class AccountApiRepository implements ApiRepository {
       if (response.statusCode != 200) {
         throw Exception("server error");
       }
+      await _session.saveSession(response.body);
       return Account.fromMap(jsonDecode(response.body));
     } catch (e) {
       throw Exception(e);
@@ -153,6 +152,7 @@ class AccountApiRepository implements ApiRepository {
         country: account.address!.country!,
         postalCode: account.address!.postalCode!,
       ).toJson();
+      print(req.toString());
       //final req = authHelper.toReq(account);
       final uri = Uri.parse(apiRoute + "/account/address");
       final headers = {

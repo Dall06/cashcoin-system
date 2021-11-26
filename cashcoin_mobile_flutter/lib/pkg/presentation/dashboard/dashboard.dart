@@ -16,6 +16,7 @@ class DashboardScreen extends ConsumerWidget {
     var space = height > 650 ? DesignSpacings.spaceM : DesignSpacings.spaceS;
     final accountBind = ref.watch(aBindingProvider);
     final statsBind = ref.watch(sBindingProvider);
+    print(statsBind);
 
     return Scaffold(
       appBar: AppBar(
@@ -27,8 +28,11 @@ class DashboardScreen extends ConsumerWidget {
         backgroundColor: DarkPalette.darkGreen,
         actions: [
           IconButton(
-            icon: const Icon(Icons.account_box, color: Colors.white70),
-            onPressed: () => Navigator.of(context).pushNamed('/account'),
+            icon: const Icon(Icons.refresh, color: Colors.white70),
+            onPressed: () async {
+              await ref.read(sessionProvider.notifier).refresh();
+              await ref.read(txnsProvider.notifier).refresh();
+            },
           ),
         ],
       ),
@@ -56,10 +60,26 @@ class DashboardScreen extends ConsumerWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.only(left: 10.0),
-                child: ListTile(
-                  title: Text('last access date: ${accountBind.lad}',
-                      style:
-                          const TextStyle(color: Colors.white60, fontSize: 14)),
+                child: Column(
+                  children: [
+                    ListTile(
+                        title: Text('last access date: ${accountBind.lad}',
+                            style: const TextStyle(
+                                color: Colors.white60, fontSize: 14))),
+                    ListTile(
+                      trailing: IconButton(
+                        icon: const Icon(Icons.account_box,
+                            color: Colors.white70),
+                        onPressed: () =>
+                            Navigator.of(context).pushNamed('/account'),
+                      ),
+                      title: const Text(
+                        'account',
+                        style: TextStyle(
+                            color: Colors.white70, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -126,61 +146,63 @@ class DashboardScreen extends ConsumerWidget {
                       colorScheme: ColorScheme.fromSwatch()
                           .copyWith(secondary: DarkPalette.darkGreen),
                     ),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: <Widget>[
-                          ListTile(
-                              trailing: IconButton(
-                                icon: const Icon(
-                                  Icons.send_to_mobile,
-                                  color: DarkPalette.darkGreen,
+                    child: Center(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: <Widget>[
+                            ListTile(
+                                trailing: IconButton(
+                                  icon: const Icon(
+                                    Icons.send_to_mobile,
+                                    color: DarkPalette.darkGreen,
+                                  ),
+                                  onPressed: () {
+                                    Navigator.of(context).pushNamed('/withdraw');
+                                  },
                                 ),
-                                onPressed: () {
-                                  Navigator.of(context).pushNamed('/withdraw');
-                                },
-                              ),
-                              title: const Text('withdraw',
-                                  style: TextStyle(
-                                    color: Colors.white70,
-                                  ))),
-                          ListTile(
-                              trailing: IconButton(
-                                icon: const Icon(
-                                  Icons.account_balance_wallet,
-                                  color: DarkPalette.darkGreen,
+                                title: const Text('withdraw',
+                                    style: TextStyle(
+                                      color: Colors.white70,
+                                    ))),
+                            ListTile(
+                                trailing: IconButton(
+                                  icon: const Icon(
+                                    Icons.account_balance_wallet,
+                                    color: DarkPalette.darkGreen,
+                                  ),
+                                  onPressed: () {
+                                    Navigator.of(context).pushNamed('/deposit');
+                                  },
                                 ),
-                                onPressed: () {
-                                  Navigator.of(context).pushNamed('/deposit');
-                                },
-                              ),
-                              title: const Text('deposit',
-                                  style: TextStyle(
-                                    color: Colors.white70,
-                                  ))),
-                          ListTile(
-                              trailing: IconButton(
-                                icon: const Icon(
-                                  Icons.system_security_update_warning_rounded,
-                                  color: DarkPalette.darkGreen,
+                                title: const Text('deposit',
+                                    style: TextStyle(
+                                      color: Colors.white70,
+                                    ))),
+                            ListTile(
+                                trailing: IconButton(
+                                  icon: const Icon(
+                                    Icons.system_security_update_warning_rounded,
+                                    color: DarkPalette.darkGreen,
+                                  ),
+                                  onPressed: () {},
                                 ),
-                                onPressed: () {},
-                              ),
-                              title: const Text('loans',
-                                  style: TextStyle(
-                                      color: Colors.white70, fontSize: 16))),
-                          ListTile(
-                              trailing: IconButton(
-                                icon: const Icon(
-                                  Icons.account_balance,
-                                  color: DarkPalette.darkGreen,
+                                title: const Text('loans',
+                                    style: TextStyle(
+                                        color: Colors.white70, fontSize: 16))),
+                            ListTile(
+                                trailing: IconButton(
+                                  icon: const Icon(
+                                    Icons.account_balance,
+                                    color: DarkPalette.darkGreen,
+                                  ),
+                                  onPressed: () {},
                                 ),
-                                onPressed: () {},
-                              ),
-                              title: const Text('budgets',
-                                  style: TextStyle(
-                                    color: Colors.white70,
-                                  ))),
-                        ],
+                                title: const Text('budgets',
+                                    style: TextStyle(
+                                      color: Colors.white70,
+                                    ))),
+                          ],
+                        ),
                       ),
                     ),
                   ),

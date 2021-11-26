@@ -87,14 +87,14 @@ class TxnApiRepository implements ApiRepository {
         toUUID: toUUID,
       ).toJson();
 
-      final uri = Uri.parse(apiRoute + "/list/");
+      final uri = Uri.parse(apiRoute + "/txn/");
       final headers = {
         HttpHeaders.contentTypeHeader: "application/json",
         "X-Session-Token": "00000000",
         "Cookie": "auth_token=$tkn;"
       };
       final res = await post(uri, headers: headers, body: jsonEncode(req));
-
+      print(res.toString());
       if (res.statusCode != 200) {
         throw Exception('server' + res.statusCode.toString());
       }

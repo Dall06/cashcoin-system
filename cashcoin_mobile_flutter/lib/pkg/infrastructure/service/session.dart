@@ -13,6 +13,7 @@ class SessionStorageService {
   }
 
   clearSession() async {
+    print('delete');
     await _storage.delete(key: _skey);
   }
 }

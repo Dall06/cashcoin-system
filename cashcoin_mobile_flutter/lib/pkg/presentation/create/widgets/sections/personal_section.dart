@@ -37,7 +37,7 @@ class _PersonalSectionState extends ConsumerState<PersonalSection> {
         backgroundColor: DarkPalette.lightBlack,
         collapsedBackgroundColor: DarkPalette.lightBlack,
         title: const Text(
-          'address',
+          'personal info',
           style: TextStyle(
               color: Colors.white60, fontSize: 14, fontWeight: FontWeight.bold),
         ),

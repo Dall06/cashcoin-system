@@ -8,11 +8,11 @@ StateNotifierProvider.autoDispose<ModifyAddressProvider, AsyncValue<bool>>(
 
 class ModifyAddressProvider extends StateNotifier<AsyncValue<bool>> {
   final AccountApiInteractor _interactor = AccountApiInteractor();
-  final Map<String, String?> _form = {
+  final Map<String, dynamic> _form = {
     'city': "",
     'estate': "",
     'street': "",
-    'bnum': "",
+    'bnum': 0,
     'pc': "",
     'country': "",
   };
@@ -23,13 +23,13 @@ class ModifyAddressProvider extends StateNotifier<AsyncValue<bool>> {
     _form[key] = value;
   }
 
-  Future<void> _register(Map<String, dynamic> m) async {
+  Future<void> _modify(Map<String, dynamic> m) async {
     final Account a = Account(
       address: Address(
         city: m['city'],
         estate: m['estate'],
         street: m['street'],
-        buildingNumber: (m['bnum'] != "") ? int.parse(m['bnum']) : 0,
+        buildingNumber: int.parse(m['bnum']),
         country: m['country'],
         postalCode: m['pc'],
       ),
@@ -40,7 +40,7 @@ class ModifyAddressProvider extends StateNotifier<AsyncValue<bool>> {
   submit() async {
     try {
       state = const AsyncValue.loading();
-      await _register(_form);
+      await _modify(_form);
       state = const AsyncData(true);
     } catch (e) {
       state = AsyncError(e);

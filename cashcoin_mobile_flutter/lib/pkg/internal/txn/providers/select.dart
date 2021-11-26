@@ -45,11 +45,11 @@ class StatsBinding {
       status = 5;
     } else if(savings == 0) {
       status = 0;
-    } else if(savings < (deposits * 0.4)) {
+    } else if(savings < (deposits * 0.35)) {
       status = 1;
-    } else if(savings < (deposits * 0.6)) {
+    } else if(savings < (deposits * 0.65)) {
       status = 2;
-    } else if(savings < (deposits * 0.8)) {
+    } else if(savings < (deposits * 0.90)) {
       status = 3;
     } else if(savings == deposits) {
       status = 4;
@@ -62,7 +62,7 @@ class StatsBinding {
     }
   }
 }
-final sBindingProvider = Provider.autoDispose((ref) {
+final sBindingProvider = Provider((ref) {
   StatsBinding stats = StatsBinding();
 
   final data = ref.watch(txnsProvider).value;
@@ -71,16 +71,18 @@ final sBindingProvider = Provider.autoDispose((ref) {
   }
   for (var element in data) {
     if (element.type == "DEPOSIT") {
-      stats.deposits = element.amount!;
+      stats.deposits = stats.deposits + element.amount!;
+      print(stats.deposits);
     } else if (element.type == "WITHDRAW") {
-      stats.withdraws = element.amount!;
+      stats.withdraws = stats.withdraws + element.amount!;
+      print(stats.withdraws);
     }
   }
   stats.setStatus();
   return stats;
 });
 
-final txnsProvider = StateNotifierProvider.autoDispose<TxnsProvider,
+final txnsProvider = StateNotifierProvider<TxnsProvider,
     AsyncValue<List<Transaction>>>((_) => TxnsProvider());
 class TxnsProvider extends StateNotifier<AsyncValue<List<Transaction>>> {
   final TxnApiInteractor _interactor = TxnApiInteractor();

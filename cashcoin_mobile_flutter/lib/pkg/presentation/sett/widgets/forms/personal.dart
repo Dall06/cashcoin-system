@@ -91,7 +91,7 @@ class FormModPersonal extends ConsumerWidget {
                     children: [
                       CFormField(
                         label: 'name',
-                        prefIcn: Icons.email,
+                        prefIcn: Icons.person,
                         type: 1,
                         obscured: false,
                         ftype: 1,
@@ -104,7 +104,7 @@ class FormModPersonal extends ConsumerWidget {
                       ),
                       CFormField(
                         label: 'last name',
-                        prefIcn: Icons.phone,
+                        prefIcn: Icons.person,
                         type: 1,
                         obscured: false,
                         ftype: 1,
@@ -117,7 +117,7 @@ class FormModPersonal extends ConsumerWidget {
                       ),
                       CFormField(
                         label: 'occupation',
-                        prefIcn: Icons.phone,
+                        prefIcn: Icons.star_rounded,
                         type: 1,
                         obscured: false,
                         ftype: 1,

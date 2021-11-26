@@ -108,7 +108,7 @@ class FormModAccount extends ConsumerWidget {
                         label: 'new phone',
                         prefIcn: Icons.phone,
                         type: 1,
-                        obscured: true,
+                        obscured: false,
                         ftype: 1,
                         onChange: (value) => ref
                             .read(modifyAccountProvider.notifier)

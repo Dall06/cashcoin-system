@@ -25,9 +25,11 @@ final dBindingProvider = Provider.autoDispose((ref) {
   return binding;
 });
 
-final aBindingProvider = Provider.autoDispose((ref) {
+final aBindingProvider = Provider((ref) {
   late AccountBinding binding = AccountBinding();
   final data = ref.watch(sessionProvider).value;
+  print('data');
+  print(data);
   if(data == null) {
     return binding;
   }
@@ -38,7 +40,7 @@ final aBindingProvider = Provider.autoDispose((ref) {
 });
 
 final sessionProvider =
-    StateNotifierProvider.autoDispose<SessionProvider, AsyncValue<Account>>(
+    StateNotifierProvider<SessionProvider, AsyncValue<Account>>(
         (_) => SessionProvider());
 
 class SessionProvider extends StateNotifier<AsyncValue<Account>> {
@@ -50,13 +52,16 @@ class SessionProvider extends StateNotifier<AsyncValue<Account>> {
   }
 
   refresh() async {
+    print('index1');
     try {
-      await _storageService.clearSession();
       state = const AsyncValue.loading();
+      await _storageService.clearSession();
       final res = await _interactor.select();
       if (res.uuid == "" || res.uuid == null) {
         throw Exception('user not found');
       }
+      print('refresh');
+      print(res);
       state = AsyncData(res);
     } catch (e) {
       state = AsyncError(e);

@@ -43,7 +43,7 @@ class LoginScreen extends ConsumerWidget {
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
         if(data == true) {
           ScaffoldMessenger.of(context).showSnackBar(_buildSnack(context, 'logged', 1));
-          Navigator.of(context).popAndPushNamed('/dashboard');
+          Navigator.of(context).pushReplacementNamed('/dashboard');
         }
       }, error: (error, _) {
         ScaffoldMessenger.of(context).hideCurrentSnackBar();

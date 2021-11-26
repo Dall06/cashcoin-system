@@ -47,7 +47,7 @@ class MakeTxnProvider extends StateNotifier<AsyncValue<bool>> {
     await _interactor.transfer(txn, m['to']);
   }
 
-  submit(BuildContext context) async {
+  submit() async {
     try {
       state = const AsyncValue.loading();
 
@@ -64,7 +64,6 @@ class MakeTxnProvider extends StateNotifier<AsyncValue<bool>> {
       await _make(_form);
      /**/
       state = const AsyncData(true);
-      Navigator.of(context).pop();
     } catch (e) {
       state = AsyncError(e);
     }

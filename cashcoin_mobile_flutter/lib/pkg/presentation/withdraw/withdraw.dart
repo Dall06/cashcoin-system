@@ -175,7 +175,7 @@ class WithdrawScreen extends ConsumerWidget {
             Button(
               title: const ButtonText(title: 'confirm', error: null),
               onPress: () {
-                ref.read(makeTxnProvider.notifier).submit(context);
+                ref.read(makeTxnProvider.notifier).submit();
               },
             ),
           ],
