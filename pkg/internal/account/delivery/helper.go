@@ -48,7 +48,7 @@ func (ah *AccountHelper) ValidatePOSTNewAccountRequest(r *http.Request) (*accoun
 		Address: account.Address{
 			UUID:          utils.CheckAndReturn(post.ADDUUID),
 			City:          post.City,
-			Estate:         post.Estate,
+			Estate:        post.Estate,
 			Street:        post.Street,
 			BuldingNumber: post.BuldingNumber,
 			Country:       post.Country,
@@ -74,7 +74,7 @@ func (ah *AccountHelper) ValidatePUTStatusRequest(r *http.Request) (*account.Acc
 	}
 
 	a = account.Account{
-		UUID:  put.AUUID,
+		UUID:   put.AUUID,
 		Status: put.Status,
 	}
 
@@ -151,7 +151,7 @@ func (ah *AccountHelper) ValidatePUTAddressRequest(r *http.Request) (*account.Ac
 		UUID: put.AUUID,
 		Address: account.Address{
 			City:          put.City,
-			Estate:         put.Estate,
+			Estate:        put.Estate,
 			Street:        put.Street,
 			BuldingNumber: put.BuldingNumber,
 			Country:       put.Country,
@@ -189,19 +189,19 @@ func (ah *AccountHelper) ValidatePUTClientRequest(r *http.Request) (*account.Acc
 
 func (ah *AccountHelper) ValidateSelectResponse(a *account.Account) (*Account, error) {
 	res := &Account{
-		UUID:    a.UUID,
-		Email:   a.Email,
-		Phone:   a.Phone,
-		Balance: a.Balance,
-		Status:  a.Status,
-		Clabe:   a.Clabe,
+		UUID:      a.UUID,
+		Email:     a.Email,
+		Phone:     a.Phone,
+		Balance:   a.Balance,
+		Status:    a.Status,
+		Clabe:     a.Clabe,
 		LastLogAt: a.LastLogdAt,
-		Address: address {
+		Address: address{
 			City:    a.Address.City,
-			Estate:   a.Address.Estate,
+			Estate:  a.Address.Estate,
 			Country: a.Address.Country,
 		},
-		Client: client {
+		Client: client{
 			Name:     a.Client.Name,
 			LastName: a.Client.LastName,
 		},
