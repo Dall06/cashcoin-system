@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.cashcoin_mobile_flutter">
    <application
-        android:label="cashcoin_mobile_flutter"
+        android:label="cash-coin"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
